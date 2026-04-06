@@ -129,6 +129,7 @@ textarea {
   top: 0;
   z-index: 200;
   padding-top: 0.9rem;
+  -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
   transition: padding 180ms ease, background 180ms ease;
 }
@@ -337,6 +338,7 @@ body[data-theme="dark"] .theme-icon-moon {
   border-radius: 24px;
   background: color-mix(in srgb, var(--bg-elevated) 96%, transparent);
   box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 }
 
@@ -554,6 +556,7 @@ summary {
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
@@ -812,6 +815,35 @@ summary {
 .project-card a {
   color: var(--primary-strong);
   font-weight: 700;
+}
+
+.package-card.is-featured {
+  border-color: rgba(11, 92, 255, 0.4);
+  box-shadow: 0 24px 60px rgba(11, 92, 255, 0.18);
+}
+
+.package-badge {
+  display: inline-flex;
+  align-self: start;
+  margin-bottom: 0.85rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(11, 92, 255, 0.12), rgba(119, 215, 255, 0.2));
+  color: var(--primary-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.resource-card,
+.guide-card,
+.package-card {
+  min-height: 100%;
+}
+
+.disclosure-note {
+  max-width: 760px;
+  margin: 1.1rem 0 0;
+  color: var(--text-soft);
 }
 
 .quote-card {
