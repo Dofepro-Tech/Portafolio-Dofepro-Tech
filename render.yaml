@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: dofepro-tech-contact-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: PORT
+        value: 3000
+      - key: EMAIL_DELIVERY_MODE
+        value: resend
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: CONTACT_TO_EMAIL
+        sync: false
+      - key: CONTACT_FROM_EMAIL
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false

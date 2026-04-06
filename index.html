@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dofepro-Tech | Innovacion Tecnologica Moderna</title>
+    <meta
+      name="description"
+      content="Landing page profesional de portafolio para presentar servicios, casos de exito y un formulario conectado a una API lista para producción."
+    />
+    <meta
+      name="keywords"
+      content="portafolio profesional, desarrollo web, landing page, frontend, backend, servicios digitales"
+    />
+    <meta name="author" content="Dofepro-Tech" />
+    <meta name="theme-color" content="#0b5cff" />
+    <meta property="og:title" content="Dofepro-Tech | Innovacion Tecnologica Moderna" />
+    <meta
+      property="og:description"
+      content="Dofepro-Tech presenta servicios, soluciones web modernas y un formulario listo para conectarse a backend real."
+    />
+    <meta property="og:image" content="assets/og-cover.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dofepro-Tech | Innovacion Tecnologica Moderna" />
+    <meta name="twitter:description" content="Landing profesional de Dofepro-Tech con portafolio, servicios y contacto listo para crecer." />
+    <meta name="twitter:image" content="assets/og-cover.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="site-data.js"></script>
+    <script defer src="script.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Dofepro-Tech",
+        "serviceType": "Desarrollo web y landing pages",
+        "areaServed": "Latinoamerica",
+        "description": "Servicios de desarrollo web, landing pages y experiencias digitales accesibles orientadas a resultados.",
+        "sameAs": ["https://www.linkedin.com/in/domingo-feliz-743b43357", "https://github.com/Dofepro-Tech"]
+      }
+    </script>
+  </head>
+  <body data-theme="light">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scrollProgressBar"></span>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container nav-wrapper">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio del portafolio">
+          <img class="brand-logo" data-brand-logo alt="Logo del portafolio" hidden />
+          <span data-brand-name>Portafolio Profesional</span>
+        </a>
+
+        <div class="header-actions">
+          <nav id="site-navigation" class="site-nav" aria-label="Navegación principal">
+            <ul class="nav-list">
+              <li><a href="#servicios">Servicios</a></li>
+              <li><a href="#stack">Stack</a></li>
+              <li><a href="#proceso">Proceso</a></li>
+              <li><a href="#proyectos">Proyectos</a></li>
+              <li><a href="#impacto">Logros</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+          </nav>
+
+          <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Cambiar tema visual">
+            <span class="theme-icons" aria-hidden="true">
+              <span class="theme-icon theme-icon-sun">☀</span>
+              <span class="theme-icon theme-icon-moon">🌙</span>
+            </span>
+            <span class="theme-toggle-label">Tema</span>
+          </button>
+
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="site-navigation"
+            aria-label="Abrir menu de navegacion"
+          >
+            <span class="nav-toggle-bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span class="nav-toggle-text">Menu</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <!-- Sección Hero -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+        <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+        <div class="container hero-grid">
+          <div class="hero-copy" data-reveal="up">
+            <p class="eyebrow">Dofepro-Tech | Innovacion Tecnologica Moderna</p>
+            <h1 id="hero-title">Diseño y desarrollo experiencias web que se ven profesionales y convierten mejor.</h1>
+            <p class="hero-text">
+              En Dofepro-Tech diseño y construyo landing pages, sitios de presentación y soluciones digitales modernas con foco en claridad, credibilidad, rendimiento y crecimiento real.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#contacto">Contactame</a>
+              <a class="button button-secondary" href="#proyectos">Ver casos de trabajo</a>
+            </div>
+
+            <div class="hero-mini-note">
+              <span class="hero-mini-dot" aria-hidden="true"></span>
+              <p>Marca tecnológica, diseño más comercial y una base sólida para pasar de demo a presencia digital real sin rehacer todo.</p>
+            </div>
+
+            <ul class="hero-metrics" aria-label="Indicadores destacados">
+              <li><strong>12+</strong><span>proyectos ejecutados</span></li>
+              <li><strong>100%</strong><span>responsive y accesible</span></li>
+              <li><strong data-response-time>24 horas</strong><span>tiempo estimado de respuesta</span></li>
+            </ul>
+          </div>
+
+          <aside class="hero-card" aria-label="Resumen profesional" data-reveal="left">
+            <div class="hero-card-badge">Disponible para nuevos proyectos</div>
+            <h2>Estructura, diseño y backend listos para crecer sin rehacer todo.</h2>
+            <p>
+              Esta landing queda lista para una presentación profesional de Dofepro-Tech: frontend optimizado, identidad visual coherente, formulario usable y una API de contacto preparada para conectarse cuando actives hosting o credenciales.
+            </p>
+
+            <div class="hero-panel-list" aria-label="Fortalezas del proyecto">
+              <div>
+                <span>Frontend</span>
+                <strong>HTML5 semántico + CSS responsive + JS progresivo</strong>
+              </div>
+              <div>
+                <span>Backend</span>
+                <strong>API REST lista para validación, email y despliegue</strong>
+              </div>
+              <div>
+                <span>SEO y accesibilidad</span>
+                <strong>Base técnica lista para auditoría y publicación</strong>
+              </div>
+            </div>
+
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 500'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%230b5cff'/%3E%3Cstop offset='100%25' stop-color='%2367d8ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='720' height='500' rx='32' fill='%230b1220'/%3E%3Crect x='36' y='36' width='648' height='52' rx='14' fill='%23182138'/%3E%3Crect x='36' y='116' width='312' height='312' rx='28' fill='url(%23g)'/%3E%3Crect x='376' y='116' width='308' height='132' rx='28' fill='%23163d8f'/%3E%3Crect x='376' y='268' width='146' height='160' rx='28' fill='%23dbeafe'/%3E%3Crect x='538' y='268' width='146' height='160' rx='28' fill='%2384ccff'/%3E%3C/svg%3E"
+              alt="Composición visual de paneles web mostrando estructura de contenido, métricas y módulos de interfaz"
+              width="720"
+              height="500"
+            />
+          </aside>
+        </div>
+      </section>
+
+      <!-- Sección Credibilidad -->
+      <section class="proof-strip" aria-label="Tecnologias y prioridades del proyecto" data-reveal="up">
+        <div class="container proof-items">
+          <span>HTML5 semantico</span>
+          <span>CSS responsive</span>
+          <span>JavaScript progresivo</span>
+          <span>Accesibilidad</span>
+          <span>SEO on-page</span>
+          <span>API lista para producción</span>
+        </div>
+      </section>
+
+      <!-- Sección Servicios -->
+      <section class="section" id="servicios" aria-labelledby="services-title">
+        <div class="container">
+          <div class="section-heading" data-reveal="up">
+            <p class="eyebrow">Servicios</p>
+            <h2 id="services-title">Soluciones pensadas para comunicar mejor, captar más y escalar con orden.</h2>
+            <p>
+              No se trata solo de que la página se vea bien. La estructura debe ayudar a entender tu propuesta, generar confianza y facilitar el contacto.
+            </p>
+          </div>
+
+          <div class="card-grid three-columns">
+            <article class="info-card" data-reveal="up">
+              <h3>Landing pages orientadas a conversión</h3>
+              <p>Hero sólido, CTA visibles, narrativa clara y secciones que acompañan la decisión del usuario hasta el contacto.</p>
+            </article>
+            <article class="info-card" data-reveal="up">
+              <h3>Presentación digital profesional</h3>
+              <p>Diseño visual coherente, copy estructurado y una percepción de marca mucho más seria desde el primer scroll.</p>
+            </article>
+            <article class="info-card" data-reveal="up">
+              <h3>Base técnica lista para crecer</h3>
+              <p>Frontend mantenible, formulario preparado para API y separación suficiente para desplegar y evolucionar el proyecto.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Stack -->
+      <section class="section section-alt" id="stack" aria-labelledby="stack-title">
+        <div class="container">
+          <div class="section-heading" data-reveal="up">
+            <p class="eyebrow">Stack tecnológico</p>
+            <h2 id="stack-title">Tecnologías y capacidades con las que Dofepro-Tech puede construir soluciones modernas.</h2>
+            <p>
+              Esta sección deja clara tu base técnica y ayuda a que un cliente o reclutador entienda rápido con qué tipo de soluciones puedes trabajar.
+            </p>
+          </div>
+
+          <div class="card-grid three-columns stack-grid">
+            <article class="stack-card" data-reveal="up">
+              <h3>Frontend</h3>
+              <ul class="stack-list">
+                <li>HTML5 semántico</li>
+                <li>CSS responsive y UI moderna</li>
+                <li>JavaScript y lógica de interacción</li>
+              </ul>
+            </article>
+            <article class="stack-card" data-reveal="up">
+              <h3>Backend</h3>
+              <ul class="stack-list">
+                <li>Node.js y Express</li>
+                <li>APIs REST y validación</li>
+                <li>Preparación para email y despliegue</li>
+              </ul>
+            </article>
+            <article class="stack-card" data-reveal="up">
+              <h3>Entrega</h3>
+              <ul class="stack-list">
+                <li>SEO on-page</li>
+                <li>Accesibilidad base</li>
+                <li>Publicación y escalabilidad</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Proceso -->
+      <section class="section section-alt" id="proceso" aria-labelledby="process-title">
+        <div class="container">
+          <div class="section-heading" data-reveal="up">
+            <p class="eyebrow">Proceso</p>
+            <h2 id="process-title">Trabajo con una secuencia simple para avanzar con criterio y sin ruido innecesario.</h2>
+          </div>
+
+          <div class="card-grid four-columns">
+            <article class="step-card" data-reveal="up">
+              <span class="step-number">01</span>
+              <h3>Diagnóstico</h3>
+              <p>Defino objetivo, audiencia, mensaje principal y resultado esperado de la landing.</p>
+            </article>
+            <article class="step-card" data-reveal="up">
+              <span class="step-number">02</span>
+              <h3>Estructura</h3>
+              <p>Organizo contenido, jerarquía visual, CTA y flujo desde el hero hasta el formulario.</p>
+            </article>
+            <article class="step-card" data-reveal="up">
+              <span class="step-number">03</span>
+              <h3>Implementación</h3>
+              <p>Construyo una interfaz responsive, accesible y preparada para conexión con backend.</p>
+            </article>
+            <article class="step-card" data-reveal="up">
+              <span class="step-number">04</span>
+              <h3>Publicación</h3>
+              <p>Dejo lista la base para subirla, auditarla y conectar envíos reales cuando corresponda.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Impacto -->
+      <section class="section" id="impacto" aria-labelledby="impact-title">
+        <div class="container">
+          <div class="section-heading" data-reveal="up">
+            <p class="eyebrow">Logros y señales de confianza</p>
+            <h2 id="impact-title">Elementos que hacen que esta landing se vea más seria, más técnica y más lista para mostrar.</h2>
+          </div>
+
+          <div class="card-grid three-columns impact-grid">
+            <article class="impact-card" data-reveal="up">
+              <strong>UI más comercial</strong>
+              <p>Header premium, modo oscuro, botones flotantes y microdetalles que elevan la percepción visual.</p>
+            </article>
+            <article class="impact-card" data-reveal="up">
+              <strong>Base profesional</strong>
+              <p>Formulario usable, borrador local, API preparada y estructura lista para contenido real.</p>
+            </article>
+            <article class="impact-card" data-reveal="up">
+              <strong>Portafolio ya aterrizado</strong>
+              <p>La página ya combina branding, contenido real, UI moderna y una base lista para publicación y evolución.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Proyectos -->
+      <section class="section" id="proyectos" aria-labelledby="projects-title">
+        <div class="container">
+          <div class="section-heading" data-reveal="up">
+            <p class="eyebrow">Proyectos destacados</p>
+            <h2 id="projects-title">Una muestra real del tipo de soluciones que Dofepro-Tech ya ha construido.</h2>
+            <p class="section-note">Estos proyectos salen de tu carpeta real y ya los redacté con enfoque profesional para que funcionen mejor como portafolio.</p>
+          </div>
+
+          <div class="card-grid three-columns">
+            <article class="project-card" data-reveal="up">
+              <p class="project-label">App multiplataforma</p>
+              <h3>Palabra Viva - juego de sopa de letras biblica</h3>
+              <p>Aplicación construida con Expo y React Native que integra autenticación, progreso por usuario, economía interna, tienda, recompensas y soporte para backend con estadísticas globales.</p>
+              <ul class="project-points">
+                <li>150 niveles activos y flujo de juego funcional</li>
+                <li>Arquitectura lista para Android, iOS y web</li>
+                <li>Preparación para monetización, login social y guardado remoto</li>
+              </ul>
+              <a href="#contacto">Ver proyecto similar para negocio o app</a>
+            </article>
+
+            <article class="project-card" data-reveal="up">
+              <p class="project-label">Software de escritorio</p>
+              <h3>Calculadora Financiera PRO</h3>
+              <p>Aplicación de escritorio en Python con interfaz moderna, arquitectura modular, historial persistente y generación de reportes PDF para diferentes operaciones financieras.</p>
+              <ul class="project-points">
+                <li>Interfaz premium con soporte claro y oscuro</li>
+                <li>Módulos de inversión, hipoteca, conversión y cálculos diarios</li>
+                <li>Exportación PDF e historial JSON local</li>
+              </ul>
+              <a href="#contacto">Solicitar software a medida</a>
+            </article>
+
+            <article class="project-card" data-reveal="up">
+              <p class="project-label">Automatización y datos</p>
+              <h3>Sistema de scraping y catálogo automático</h3>
+              <p>Solución en Python que extrae productos en tiempo real desde MercadoLibre, descarga imágenes y genera automáticamente una interfaz web para visualización del catálogo.</p>
+              <ul class="project-points">
+                <li>Extracción automatizada con BeautifulSoup y Requests</li>
+                <li>Generación de reporte estructurado y catálogo visual</li>
+                <li>Automatización útil para monitoreo, catálogos y análisis comercial</li>
+              </ul>
+              <a href="#contacto">Quiero automatizar un proceso</a>
+            </article>
+
+            <article class="project-card" data-reveal="up">
+              <p class="project-label">Experiencia web avanzada</p>
+              <h3>Dofepro-Tech Ecosistema Cloud</h3>
+              <p>Interfaz web con enfoque futurista que combina catálogo visual, autenticación con Firebase, sincronización de carrito, asistente IA y componentes avanzados para una experiencia más inmersiva.</p>
+              <ul class="project-points">
+                <li>Frontend moderno con Tailwind y JavaScript modular</li>
+                <li>Integración con Firebase Auth y Firestore</li>
+                <li>Asistente IA y microinteracciones orientadas a producto</li>
+              </ul>
+              <a href="#contacto">Quiero una experiencia web más potente</a>
+            </article>
+
+            <article class="project-card" data-reveal="up">
+              <p class="project-label">Frontend utilitario</p>
+              <h3>Encriptador de Texto</h3>
+              <p>Herramienta web creada para cifrar y descifrar texto con una interfaz clara, responsive y validaciones de entrada, pensada para una experiencia simple y directa de usuario.</p>
+              <ul class="project-points">
+                <li>Construido con HTML, CSS y JavaScript</li>
+                <li>Validación de formato y copia al portapapeles</li>
+                <li>Buen ejemplo de lógica frontend aplicada</li>
+              </ul>
+              <a href="#contacto">Desarrollar una herramienta web similar</a>
+            </article>
+
+            <article class="project-card" data-reveal="up">
+              <p class="project-label">Seguridad y lógica</p>
+              <h3>PyCaesar CLI</h3>
+              <p>Herramienta interactiva de línea de comandos construida en Python para encriptar y desencriptar mensajes con una variante alfanumérica del cifrado César, con validación de entradas y flujo de uso claro.</p>
+              <ul class="project-points">
+                <li>Soporte para letras y números con desplazamiento seguro</li>
+                <li>Manejo de errores y experiencia interactiva por terminal</li>
+                <li>Buen ejemplo de lógica backend aplicada en Python</li>
+              </ul>
+              <a href="#contacto">Desarrollar una utilidad técnica similar</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Confianza -->
+      <section class="section section-alt" id="testimonios" aria-labelledby="trust-title">
+        <div class="container trust-grid">
+          <div>
+            <div class="section-heading compact" data-reveal="up">
+              <p class="eyebrow">Confianza</p>
+              <h2 id="trust-title">Prueba social y respuestas claras para reducir fricción antes del contacto.</h2>
+            </div>
+
+            <div class="card-grid two-columns testimonial-grid">
+              <article class="quote-card" data-reveal="up">
+                <p>“La nueva estructura explica mejor lo que hacemos y transmite mucha más seriedad desde el inicio.”</p>
+                <span>Servicio administrativo</span>
+              </article>
+              <article class="quote-card" data-reveal="up">
+                <p>“El sitio quedó más claro, más rápido y con una presentación mucho más profesional.”</p>
+                <span>Negocio local</span>
+              </article>
+            </div>
+          </div>
+
+          <aside class="faq-card" aria-labelledby="faq-title" data-reveal="left">
+            <h3 id="faq-title">Preguntas frecuentes</h3>
+
+            <details>
+              <summary>¿La landing ya puede conectarse a un backend real?</summary>
+              <p>Si. El frontend queda preparado para usar una API configurable y el backend ya incluye un endpoint de contacto listo para validación y envío.</p>
+            </details>
+
+            <details>
+              <summary>¿Se puede publicar aunque todavía no haya credenciales?</summary>
+              <p>Si. Puedes publicar el frontend primero y dejar el formulario en modo demo hasta conectar la API cuando tengas hosting o acceso al servicio.</p>
+            </details>
+
+            <details>
+              <summary>¿La estructura sirve para mostrar trabajos reales?</summary>
+              <p>Si. Solo necesitas reemplazar textos de ejemplo, enlaces y métricas por tus datos definitivos.</p>
+            </details>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Sección Formulario -->
+      <section class="section section-form" id="contacto" aria-labelledby="contact-title">
+        <div class="container form-layout">
+          <div class="contact-panel" data-reveal="up">
+            <p class="eyebrow">CTA principal</p>
+            <h2 id="contact-title">Conversemos sobre una landing, un sitio o una mejora concreta para tu negocio.</h2>
+            <p>
+              Este formulario está preparado para dos escenarios: modo demo local mientras trabajas la maqueta, o modo API para enviar datos reales a un backend cuando tengas listo el despliegue.
+            </p>
+
+            <ul class="contact-points">
+              <li>
+                <span>Correo principal</span>
+                <strong><a data-contact-email-link href="mailto:tucorreo@ejemplo.com">tucorreo@ejemplo.com</a></strong>
+              </li>
+              <li>
+                <span>Correo alternativo</span>
+                <strong><a data-secondary-email-link href="mailto:otro@ejemplo.com">otro@ejemplo.com</a></strong>
+              </li>
+              <li>
+                <span>LinkedIn</span>
+                <strong><a data-linkedin-link href="https://www.linkedin.com" target="_blank" rel="noreferrer">Perfil profesional</a></strong>
+              </li>
+              <li>
+                <span>Estado del formulario</span>
+                <strong data-api-status>Modo demo local</strong>
+              </li>
+            </ul>
+          </div>
+
+          <form class="contact-form" id="contactForm" novalidate data-reveal="left">
+            <div class="field-group honeypot" aria-hidden="true">
+              <label for="website">No completar este campo</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="field-group">
+              <label for="nombre">Nombre completo</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="name" required minlength="3" aria-describedby="nombre-help" placeholder="Escribe tu nombre" />
+              <small class="field-help" id="nombre-help">Minimo 3 caracteres.</small>
+            </div>
+
+            <div class="field-group">
+              <label for="correo">Correo electronico</label>
+              <input id="correo" name="correo" type="email" autocomplete="email" required aria-describedby="correo-help" placeholder="tunombre@correo.com" />
+              <small class="field-help" id="correo-help">Usa un correo valido para poder responderte.</small>
+            </div>
+
+            <div class="field-group">
+              <label for="negocio">Negocio o marca</label>
+              <input id="negocio" name="negocio" type="text" autocomplete="organization" placeholder="Nombre de tu negocio o proyecto" />
+            </div>
+
+            <div class="field-group">
+              <label for="servicio">Servicio de interes</label>
+              <select id="servicio" name="servicio" required>
+                <option value="">Selecciona una opcion</option>
+                <option value="landing">Landing page</option>
+                <option value="sitio-web">Sitio web informativo</option>
+                <option value="redisenio">Redisenio visual</option>
+                <option value="mantenimiento">Soporte o mejora continua</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="mensaje">Cuéntame lo que necesitas</label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                rows="6"
+                required
+                minlength="10"
+                maxlength="500"
+                aria-describedby="mensaje-help"
+                placeholder="Describe tu objetivo, lo que quieres mejorar y el tipo de resultado que esperas"
+              ></textarea>
+              <small class="field-help" id="mensaje-help"><span id="charCount">0</span>/500 caracteres.</small>
+            </div>
+
+            <div class="field-group checkbox-row">
+              <input id="privacidad" name="privacidad" type="checkbox" required />
+              <label for="privacidad">Acepto el tratamiento de mis datos para recibir respuesta sobre este proyecto.</label>
+            </div>
+
+            <button class="button button-primary button-full" id="submitButton" type="submit">
+              <span data-submit-label>Enviar mensaje</span>
+            </button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="footer-title" data-brand-name>Portafolio Profesional</p>
+          <p data-brand-tagline>Innovacion Tecnologica Moderna</p>
+          <p>Desarrollo web con enfoque claro, accesible, orientado a resultados y preparado para crecer a producto real.</p>
+        </div>
+
+        <div class="footer-data">
+          <p><strong>Marca:</strong> <span data-brand-name>Dofepro-Tech</span></p>
+          <p><strong>Correo principal:</strong> <a data-contact-email-link href="mailto:tucorreo@ejemplo.com">tucorreo@ejemplo.com</a></p>
+          <p><strong>Correo alternativo:</strong> <a data-secondary-email-link href="mailto:otro@ejemplo.com">otro@ejemplo.com</a></p>
+          <p><strong>LinkedIn:</strong> <a data-linkedin-link href="https://www.linkedin.com" target="_blank" rel="noreferrer">Perfil profesional</a></p>
+          <p><strong>GitHub:</strong> <a data-github-link href="https://github.com" target="_blank" rel="noreferrer">Repositorio</a></p>
+        </div>
+
+        <p class="footer-copy">© <span id="currentYear">2026</span> <span data-brand-name>Portafolio Profesional</span>. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <div class="floating-actions" aria-label="Acciones rápidas">
+      <button class="floating-button" id="scrollTopButton" type="button" aria-label="Ir arriba" title="Ir arriba">
+        ↑
+      </button>
+    </div>
+  </body>
+</html>
