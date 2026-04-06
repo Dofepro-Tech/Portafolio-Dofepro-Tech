@@ -64,6 +64,10 @@ body {
   transition: background 220ms ease, color 220ms ease;
 }
 
+.legal-container {
+  max-width: 860px;
+}
+
 a {
   color: inherit;
 }
