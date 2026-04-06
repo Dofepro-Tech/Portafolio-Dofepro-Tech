@@ -16,9 +16,9 @@ window.PORTFOLIO_CONFIG = {
     defaultTheme: 'light'
   },
   contact: {
-    formMode: 'demo',
-    apiBaseUrl: '',
+    formMode: 'api',
+    apiBaseUrl: 'https://portafolio-dofepro-tech-api.onrender.com',
     endpointPath: '/api/contact',
-    allowLocalFallback: true
+    allowLocalFallback: false
   }
 };
