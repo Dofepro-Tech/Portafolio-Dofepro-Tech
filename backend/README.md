@@ -15,6 +15,7 @@ API Node.js + Express lista para conectar el formulario del portafolio a un envi
 2. Define PORT y ALLOWED_ORIGINS.
 3. Mientras no tengas credenciales, deja EMAIL_DELIVERY_MODE=log.
 4. Cuando vayas a produccion, cambia a EMAIL_DELIVERY_MODE=resend y completa RESEND_API_KEY, CONTACT_TO_EMAIL y CONTACT_FROM_EMAIL.
+5. Para Resend, usa un remitente bajo un dominio verificado por ti. No conviene usar Gmail como CONTACT_FROM_EMAIL en produccion.
 
 ## Comandos
 - npm install
@@ -44,7 +45,6 @@ Si el backend queda en otro dominio, entonces usa la URL real de tu servicio pub
 ## Payload esperado
 {
   "name": "Domingo Feliz",
-  "email": "elsonidistaadnj@gmail.com",
   "email": "domingofelizpro@gmail.com",
   "company": "Dofepro-Tech",
   "service": "landing",
