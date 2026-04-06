@@ -16,7 +16,7 @@ window.PORTFOLIO_CONFIG = {
     defaultTheme: 'light'
   },
   contact: {
-    formMode: 'api',
+    formMode: 'demo',
     apiBaseUrl: '',
     endpointPath: '/api/contact',
     allowLocalFallback: true

@@ -99,7 +99,7 @@ const updateApiStatus = () => {
   }
 
   if (appConfig.contact.formMode !== 'api') {
-    status.textContent = 'Modo demo local con almacenamiento en navegador';
+    status.textContent = 'Contacto por correo mientras se activa el formulario en linea';
     return;
   }
 
@@ -469,14 +469,14 @@ if (form) {
       } else {
         handleSuccessfulSubmission(
           payload,
-          'Formulario probado en modo demo. Los datos quedaron guardados localmente y la API puede activarse cuando completes el despliegue.'
+          `El formulario en linea se activara en una proxima actualizacion. Mientras tanto, escribeme directamente a ${appConfig.social.email}.`
         );
       }
     } catch (error) {
       if (appConfig.contact.allowLocalFallback) {
         localStorage.setItem(submissionStorageKey, JSON.stringify(payload));
         setStatus(
-          'La API todavia no esta disponible, pero el mensaje se guardo localmente como respaldo. Cuando conectes el backend, el envio sera real.',
+          `El envio en linea todavia no esta disponible. Usa el correo ${appConfig.social.email} para contactarme de inmediato.`,
           'is-error'
         );
       } else {
