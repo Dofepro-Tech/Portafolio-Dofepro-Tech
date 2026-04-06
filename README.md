@@ -1,4 +1,4 @@
-# Dofepro-Tech Landing Portfolio
+# Portafolio-Dofepro-Tech
 
 Landing profesional de Dofepro-Tech diseñada para presentar servicios, proyectos reales y un canal de contacto preparado para evolucionar de demo local a integración con backend en producción.
 

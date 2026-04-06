@@ -26,12 +26,13 @@
 Ejemplo de configuracion final en site-data.js:
 
 window.PORTFOLIO_CONFIG = {
-  brandName: 'Tu Nombre / Tu Marca',
+  brandName: 'Dofepro-Tech',
   responseTime: '24 horas',
   social: {
-    email: 'tucorreo@ejemplo.com',
-    linkedin: 'https://www.linkedin.com/in/tu-perfil',
-    github: 'https://github.com/tu-usuario'
+    email: 'domingofelizpro@gmail.com',
+    secondaryEmail: 'elsonidistaadnj@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/domingo-feliz-743b43357',
+    github: 'https://github.com/Dofepro-Tech'
   },
   contact: {
     formMode: 'api',
@@ -41,10 +42,9 @@ window.PORTFOLIO_CONFIG = {
   }
 };
 
-Si publicas el backend en otro dominio, entonces cambia apiBaseUrl por una URL completa, por ejemplo https://tu-backend.onrender.com.
+Si publicas el backend en otro dominio, entonces cambia apiBaseUrl por la URL real de tu servicio publicado.
 
 ## Recomendaciones antes de publicar
-- Reemplazar los textos de ejemplo por tus datos reales.
 - Actualizar sitemap.xml con tu dominio final.
 - Ajustar enlaces sociales y correo.
 - Ejecutar una auditoria Lighthouse con la web publicada.

@@ -35,7 +35,7 @@ Ejemplo:
   }
 }
 
-Si el backend queda en otro dominio, entonces usa una URL completa como https://tu-backend.onrender.com.
+Si el backend queda en otro dominio, entonces usa la URL real de tu servicio publicado en Render o en el proveedor que elijas.
 
 ## Endpoints
 - GET /api/health
@@ -43,9 +43,10 @@ Si el backend queda en otro dominio, entonces usa una URL completa como https://
 
 ## Payload esperado
 {
-  "name": "Nombre Apellido",
-  "email": "correo@ejemplo.com",
-  "company": "Mi negocio",
+  "name": "Domingo Feliz",
+  "email": "elsonidistaadnj@gmail.com",
+  "email": "domingofelizpro@gmail.com",
+  "company": "Dofepro-Tech",
   "service": "landing",
   "message": "Necesito una landing para captar clientes.",
   "privacyAccepted": true,

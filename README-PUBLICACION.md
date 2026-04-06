@@ -37,7 +37,7 @@ La carpeta backend puede desplegarse en:
 
 ## Dos formas validas de conectar la API
 - Mismo dominio o proxy: deja apiBaseUrl vacio y usa /api/contact.
-- Backend separado: usa una URL completa como https://api.tudominio.com.
+- Backend separado: usa la URL real de tu API publicada.
 
 ## Despliegue concreto en Netlify + Render
 1. Sube este proyecto a GitHub.
@@ -48,7 +48,7 @@ La carpeta backend puede desplegarse en:
 6. En Render completa CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL y RESEND_API_KEY.
 7. Copia site-data.netlify-render.example.js sobre site-data.js y reemplaza la URL de apiBaseUrl por la URL real de Render.
 8. Vuelve a publicar Netlify o haz un nuevo deploy para que el frontend apunte a la API real.
-9. Prueba primero https://tu-backend.onrender.com/api/health y luego el formulario desde el frontend publicado.
+9. Prueba primero la ruta /api/health de tu servicio publicado y luego el formulario desde el frontend publicado.
 
 ## Subir el proyecto a GitHub
 Desde la raiz del proyecto puedes usar este flujo:
@@ -58,7 +58,7 @@ git init
 git add .
 git commit -m "feat: initial portfolio release"
 git branch -M main
-git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
+git remote add origin https://github.com/Dofepro-Tech/Portafolio-Dofepro-Tech.git
 git push -u origin main
 ```
 
@@ -76,5 +76,5 @@ Flujo recomendado:
 
 ## Recomendaciones sociales
 - Usa la imagen assets/og-cover.svg como base para compartir en redes.
-- Mantén el nombre Dofepro-Tech y el lema consistentes en bio, web y portada.
+- Mantén el nombre Portafolio-Dofepro-Tech como identidad pública del sitio y Dofepro-Tech como marca principal.
 - Comparte el enlace con una descripcion corta orientada a servicios y resultados.
