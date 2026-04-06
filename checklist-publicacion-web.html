@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checklist para publicar un sitio con formulario y backend | Dofepro-Tech</title>
+    <meta
+      name="description"
+      content="Checklist práctico para publicar un sitio con formulario real, backend, SEO base y validaciones esenciales antes de compartirlo o indexarlo en Google."
+    />
+    <meta name="author" content="Dofepro-Tech" />
+    <meta name="theme-color" content="#0b5cff" />
+    <meta property="og:title" content="Checklist para publicar un sitio con formulario y backend | Dofepro-Tech" />
+    <meta
+      property="og:description"
+      content="Revisa backend, formulario, CORS, sitemap, Search Console y otros puntos clave antes de publicar un sitio en internet."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/checklist-publicacion-web.html" />
+    <meta property="og:image" content="assets/og-cover.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Checklist para publicar un sitio con formulario y backend | Dofepro-Tech" />
+    <meta
+      name="twitter:description"
+      content="Una lista clara de comprobación para lanzar un sitio con contacto real, SEO básico y una publicación más sólida."
+    />
+    <meta name="twitter:image" content="assets/og-cover.svg" />
+    <link rel="canonical" href="https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/checklist-publicacion-web.html" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="site-data.js"></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body data-theme="light">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scrollProgressBar"></span>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrapper">
+        <a class="brand" href="index.html" aria-label="Volver al inicio del sitio">
+          <img class="brand-logo" data-brand-logo alt="Logo del portafolio" hidden />
+          <span data-brand-name>Dofepro-Tech</span>
+        </a>
+
+        <div class="header-actions">
+          <a class="button button-secondary" href="index.html#guias">Volver al sitio</a>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Cambiar tema visual">
+            <span class="theme-icons" aria-hidden="true">
+              <span class="theme-icon theme-icon-sun">☀</span>
+              <span class="theme-icon theme-icon-moon">🌙</span>
+            </span>
+            <span class="theme-toggle-label">Tema</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <section class="section page-hero" aria-labelledby="article-title">
+        <div class="container">
+          <div class="section-heading" data-reveal="up">
+            <p class="eyebrow">Publicación real</p>
+            <h1 id="article-title">Checklist para publicar un sitio con formulario y backend</h1>
+            <p>
+              Publicar no es solo subir archivos. Si el objetivo es verse serio, captar contactos y quedar listo para Google, conviene revisar varios puntos antes de compartir el enlace con clientes o contactos.
+            </p>
+            <div class="article-meta">
+              <span>Checklist</span>
+              <span>Backend</span>
+              <span>SEO técnico</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container article-layout">
+          <article class="article-content" data-reveal="up">
+            <section>
+              <h2>1. Valida el formulario completo</h2>
+              <p>
+                No basta con ver el botón o recibir un mensaje visual. Debes hacer una prueba real desde el frontend hasta el correo final para confirmar que el flujo está cerrado de extremo a extremo.
+              </p>
+              <ul class="article-checklist">
+                <li>El formulario debe validar campos obligatorios.</li>
+                <li>El backend debe responder sin errores.</li>
+                <li>El correo debe llegar al buzón correcto.</li>
+                <li>El mensaje de éxito debe ser claro para el usuario.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>2. Revisa CORS, endpoint y estado del backend</h2>
+              <p>
+                Si el frontend está en un dominio y el backend en otro, CORS debe permitir exactamente ese origen. También conviene tener un endpoint de salud para comprobar rápidamente que el servicio sigue arriba.
+              </p>
+              <ul class="article-list">
+                <li>Configura el origin permitido con la URL real del frontend.</li>
+                <li>Verifica el endpoint de salud después de cada despliegue.</li>
+                <li>Comprueba que el proveedor de correo tenga las credenciales correctas.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>3. Deja la base SEO mínima completa</h2>
+              <p>
+                Esta parte marca la diferencia entre estar publicado y estar realmente listo para buscadores. Son cambios pequeños, pero sin ellos Google entiende peor el sitio.
+              </p>
+              <ul class="article-checklist">
+                <li>Título y descripción de cada página.</li>
+                <li>Canonical correcta.</li>
+                <li>robots.txt y sitemap actualizados.</li>
+                <li>Search Console configurado.</li>
+                <li>URLs internas enlazadas entre sí.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>4. Añade confianza visible</h2>
+              <p>
+                Un sitio técnicamente correcto sigue fallando si no da confianza. La publicación final debe incluir contexto comercial, vías de contacto y piezas legales mínimas.
+              </p>
+              <ul class="article-list">
+                <li>Correo principal y alternativa visible.</li>
+                <li>Política de privacidad accesible.</li>
+                <li>Pruebas de trabajo, logros o respuestas frecuentes.</li>
+                <li>Una llamada a la acción fácil de entender.</li>
+              </ul>
+            </section>
+
+            <div class="article-callout">
+              <h3>Resumen práctico</h3>
+              <p>
+                Si quieres publicar con mejor criterio, piensa en cuatro capas: contacto real, backend estable, SEO mínimo y confianza visible. Si esas capas están bien, el sitio ya puede empezar a trabajar a tu favor.
+              </p>
+              <a href="index.html#contacto">Pedir revisión antes de publicar</a>
+            </div>
+          </article>
+
+          <aside class="article-sidebar" data-reveal="left">
+            <div class="article-card">
+              <h3>Checklist rápido</h3>
+              <ul class="article-checklist">
+                <li>Formulario probado</li>
+                <li>Backend respondiendo</li>
+                <li>Correo entregando</li>
+                <li>Sitemap enviado</li>
+                <li>Search Console verificado</li>
+              </ul>
+            </div>
+
+            <div class="article-card">
+              <h3>Siguiente lectura</h3>
+              <div class="article-links">
+                <a href="guia-landing-negocio.html">Cómo saber si tu negocio necesita una landing page</a>
+                <a href="elegir-hosting-stack.html">Cómo elegir hosting, dominio y stack sin pagar de más</a>
+                <a href="index.html#paquetes">Ver auditorías y soporte</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="footer-title" data-brand-name>Dofepro-Tech</p>
+          <p data-brand-tagline>Innovacion Tecnologica Moderna</p>
+          <p>Base técnica, contenido útil y criterios claros para publicar sitios más serios y mejor preparados.</p>
+        </div>
+
+        <div class="footer-data">
+          <p><strong>Correo principal:</strong> <a data-contact-email-link href="mailto:domingofelizpro@gmail.com">domingofelizpro@gmail.com</a></p>
+          <p><strong>LinkedIn:</strong> <a data-linkedin-link href="https://www.linkedin.com/in/domingo-feliz-743b43357" target="_blank" rel="noreferrer noopener">Domingo Feliz</a></p>
+          <p><strong>GitHub:</strong> <a data-github-link href="https://github.com/Dofepro-Tech" target="_blank" rel="noreferrer noopener">Dofepro-Tech</a></p>
+          <p><strong>Legal:</strong> <a href="politica-privacidad.html">Politica de privacidad</a></p>
+        </div>
+
+        <p class="footer-copy">© <span id="currentYear">2026</span> <span data-brand-name>Dofepro-Tech</span>. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <div class="floating-actions" aria-label="Acciones rápidas">
+      <button class="floating-button" id="scrollTopButton" type="button" aria-label="Ir arriba" title="Ir arriba">
+        ↑
+      </button>
+    </div>
+  </body>
+</html>

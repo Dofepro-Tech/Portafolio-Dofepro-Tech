@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Como elegir hosting, dominio y stack sin pagar de más | Dofepro-Tech</title>
+    <meta
+      name="description"
+      content="Guia práctica para elegir hosting, dominio y stack al inicio de un proyecto web sin gastar de más ni sobredimensionar la solución."
+    />
+    <meta name="author" content="Dofepro-Tech" />
+    <meta name="theme-color" content="#0b5cff" />
+    <meta property="og:title" content="Como elegir hosting, dominio y stack sin pagar de más | Dofepro-Tech" />
+    <meta
+      property="og:description"
+      content="Aprende cómo empezar con una base web ligera, qué herramientas convienen al inicio y cuándo tiene sentido escalar."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/elegir-hosting-stack.html" />
+    <meta property="og:image" content="assets/og-cover.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Como elegir hosting, dominio y stack sin pagar de más | Dofepro-Tech" />
+    <meta
+      name="twitter:description"
+      content="Una comparativa clara para decidir frontend, backend, dominio y herramientas según la etapa real del proyecto."
+    />
+    <meta name="twitter:image" content="assets/og-cover.svg" />
+    <link rel="canonical" href="https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/elegir-hosting-stack.html" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="site-data.js"></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body data-theme="light">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scrollProgressBar"></span>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav-wrapper">
+        <a class="brand" href="index.html" aria-label="Volver al inicio del sitio">
+          <img class="brand-logo" data-brand-logo alt="Logo del portafolio" hidden />
+          <span data-brand-name>Dofepro-Tech</span>
+        </a>
+
+        <div class="header-actions">
+          <a class="button button-secondary" href="index.html#guias">Volver al sitio</a>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Cambiar tema visual">
+            <span class="theme-icons" aria-hidden="true">
+              <span class="theme-icon theme-icon-sun">☀</span>
+              <span class="theme-icon theme-icon-moon">🌙</span>
+            </span>
+            <span class="theme-toggle-label">Tema</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <section class="section page-hero" aria-labelledby="article-title">
+        <div class="container">
+          <div class="section-heading" data-reveal="up">
+            <p class="eyebrow">Decisión técnica</p>
+            <h1 id="article-title">Como elegir hosting, dominio y stack sin pagar de más al inicio</h1>
+            <p>
+              Muchos proyectos pequeños gastan de más porque copian estructuras grandes antes de validar si realmente las necesitan. Elegir bien al inicio no es elegir lo más complejo, sino lo suficiente para publicar, medir y aprender.
+            </p>
+            <div class="article-meta">
+              <span>Hosting</span>
+              <span>Dominio</span>
+              <span>Escalabilidad</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container article-layout">
+          <article class="article-content" data-reveal="up">
+            <section>
+              <h2>Empieza por el objetivo, no por la tecnología</h2>
+              <p>
+                Si el objetivo inmediato es presentarte mejor y captar consultas, una combinación simple suele rendir más que una arquitectura sobredimensionada. La tecnología debe seguir al objetivo comercial y no al revés.
+              </p>
+              <ul class="article-list">
+                <li>Frontend estático cuando el contenido es relativamente estable.</li>
+                <li>Backend sencillo si el formulario necesita envío real o automatización.</li>
+                <li>Dominio propio cuando la marca ya necesita una percepción más profesional.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>Una base razonable para empezar</h2>
+              <p>
+                Para muchos portafolios, servicios y pequeñas marcas, una base ligera es suficiente y permite aprender rápido qué hace falta mejorar. Ese enfoque evita pagar infraestructura compleja antes de tiempo.
+              </p>
+              <ul class="article-checklist">
+                <li>Frontend estático en GitHub Pages o Netlify.</li>
+                <li>Backend en Render para formularios, email y pequeñas APIs.</li>
+                <li>Correo transaccional con Resend o Brevo.</li>
+                <li>Search Console y sitemap para indexación.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>Cuándo pagar por dominio</h2>
+              <p>
+                El dominio propio no es obligatorio para arrancar, pero sí mejora bastante la percepción de marca y el recuerdo del sitio. Si ya vas a compartir la web con clientes, reclutadores o aliados, suele ser una inversión razonable.
+              </p>
+              <p>
+                En cambio, si todavía estás probando mensajes, estructura o portafolio, puedes publicar primero y comprar el dominio cuando la base ya esté más consolidada.
+              </p>
+            </section>
+
+            <section>
+              <h2>Cuándo escalar a algo más robusto</h2>
+              <p>
+                Vale la pena escalar cuando aparece una necesidad concreta: guardar leads en base de datos, manejar usuarios, tener panel administrativo, automatizaciones avanzadas o contenido dinámico frecuente.
+              </p>
+              <ul class="article-list">
+                <li>Base de datos cuando necesitas historial real o gestión interna.</li>
+                <li>CMS o panel cuando el contenido cambia con frecuencia.</li>
+                <li>Analítica más seria cuando ya hay tráfico y decisiones que medir.</li>
+              </ul>
+            </section>
+
+            <div class="article-callout">
+              <h3>Idea central</h3>
+              <p>
+                La mejor arquitectura inicial es la que te permite publicar bien, captar oportunidades y crecer con orden. Empezar simple no es quedarse corto; es evitar complejidad sin retorno claro.
+              </p>
+              <a href="index.html#contacto">Pedir orientación técnica</a>
+            </div>
+          </article>
+
+          <aside class="article-sidebar" data-reveal="left">
+            <div class="article-card">
+              <h3>Recomendación general</h3>
+              <ul class="article-list">
+                <li>Publica primero</li>
+                <li>Mide después</li>
+                <li>Escala solo cuando haga falta</li>
+              </ul>
+            </div>
+
+            <div class="article-card">
+              <h3>Siguiente lectura</h3>
+              <div class="article-links">
+                <a href="guia-landing-negocio.html">Cómo saber si tu negocio necesita una landing page</a>
+                <a href="checklist-publicacion-web.html">Checklist para publicar un sitio con formulario y backend</a>
+                <a href="index.html#recursos">Ver recursos recomendados</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="footer-title" data-brand-name>Dofepro-Tech</p>
+          <p data-brand-tagline>Innovacion Tecnologica Moderna</p>
+          <p>Decisiones técnicas más sobrias, mejor base para publicar y crecimiento con menos ruido.</p>
+        </div>
+
+        <div class="footer-data">
+          <p><strong>Correo principal:</strong> <a data-contact-email-link href="mailto:domingofelizpro@gmail.com">domingofelizpro@gmail.com</a></p>
+          <p><strong>LinkedIn:</strong> <a data-linkedin-link href="https://www.linkedin.com/in/domingo-feliz-743b43357" target="_blank" rel="noreferrer noopener">Domingo Feliz</a></p>
+          <p><strong>GitHub:</strong> <a data-github-link href="https://github.com/Dofepro-Tech" target="_blank" rel="noreferrer noopener">Dofepro-Tech</a></p>
+          <p><strong>Legal:</strong> <a href="politica-privacidad.html">Politica de privacidad</a></p>
+        </div>
+
+        <p class="footer-copy">© <span id="currentYear">2026</span> <span data-brand-name>Dofepro-Tech</span>. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <div class="floating-actions" aria-label="Acciones rápidas">
+      <button class="floating-button" id="scrollTopButton" type="button" aria-label="Ir arriba" title="Ir arriba">
+        ↑
+      </button>
+    </div>
+  </body>
+</html>

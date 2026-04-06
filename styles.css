@@ -840,10 +840,116 @@ summary {
   min-height: 100%;
 }
 
+.guide-card a {
+  color: var(--primary-strong);
+  font-weight: 700;
+}
+
 .disclosure-note {
   max-width: 760px;
   margin: 1.1rem 0 0;
   color: var(--text-soft);
+}
+
+.page-hero {
+  padding: 4.4rem 0 2rem;
+}
+
+.page-hero .section-heading {
+  max-width: 780px;
+}
+
+.article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.65fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.article-content,
+.article-sidebar,
+.article-card,
+.article-callout {
+  padding: 1.55rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.article-content h2,
+.article-content h3 {
+  margin-top: 0;
+}
+
+.article-content section + section {
+  margin-top: 1.4rem;
+}
+
+.article-content p,
+.article-content li,
+.article-sidebar p,
+.article-sidebar li {
+  color: var(--text-soft);
+}
+
+.article-list,
+.article-links,
+.article-checklist {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.article-links {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.article-links a,
+.article-content a,
+.article-sidebar a {
+  color: var(--primary-strong);
+  font-weight: 700;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.article-meta span {
+  display: inline-flex;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-soft) 78%, transparent);
+  color: var(--primary-strong);
+  font-weight: 700;
+}
+
+.article-sidebar {
+  display: grid;
+  gap: 1rem;
+  position: sticky;
+  top: 5.5rem;
+}
+
+.article-sidebar h3,
+.article-card h3,
+.article-callout h3 {
+  margin: 0;
+}
+
+.article-callout {
+  margin-top: 1.5rem;
+}
+
+.article-checklist li + li,
+.article-list li + li {
+  margin-top: 0.6rem;
 }
 
 .quote-card {
@@ -1111,6 +1217,7 @@ body[data-theme="dark"] .quote-card::before {
   .three-columns,
   .four-columns,
   .two-columns,
+  .article-layout,
   .stack-grid,
   .impact-grid,
   .form-layout,
@@ -1118,6 +1225,11 @@ body[data-theme="dark"] .quote-card::before {
   .trust-grid,
   .testimonial-grid {
     grid-template-columns: 1fr;
+  }
+
+  .article-sidebar {
+    position: static;
+    top: auto;
   }
 
   .footer-copy {
