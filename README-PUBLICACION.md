@@ -26,6 +26,8 @@ La carpeta backend puede desplegarse en:
 - backend/.env.production.example: variables base para backend en producción.
 - netlify.toml: publicación estática con headers y caché recomendados.
 - render.yaml: blueprint del backend para Render.
+- politica-privacidad.html: base legal pública para futuras integraciones de anuncios y formularios.
+- ads.txt: archivo editable para monetización cuando tengas tu cuenta aprobada.
 
 ## Flujo recomendado
 1. Duplica site-data.production.example.js como site-data.js final de deploy.
@@ -73,6 +75,16 @@ Flujo recomendado:
 3. Si cambias la URL del backend, actualiza site-data.js y vuelve a desplegar Netlify.
 4. Publica primero el backend cuando haya cambios de API y luego el frontend.
 5. Repite la prueba de /api/health y un envío real del formulario.
+
+## Monetización futura
+La base ya queda preparada para una actualización de anuncios.
+
+Antes de activar monetización:
+1. Completa ads.txt con la línea oficial de tu red publicitaria, por ejemplo Google AdSense.
+2. Revisa y ajusta politica-privacidad.html para reflejar el proveedor de anuncios, cookies y tratamiento de datos vigente.
+3. Añade el script real de anuncios solo cuando tengas el publisher ID aprobado.
+4. Vuelve a probar rendimiento, diseño móvil y Core Web Vitals para que los anuncios no degraden la experiencia.
+5. Si usas AdSense, verifica el dominio en la plataforma antes de esperar ingresos.
 
 ## Recomendaciones sociales
 - Usa la imagen assets/og-cover.svg como base para compartir en redes.

@@ -35,3 +35,9 @@
 - Actualizar backend primero si hubo cambios de API, CORS o correo.
 - Actualizar frontend despues si cambiaste textos, proyectos, estilos o apiBaseUrl.
 - Repetir prueba de /api/health y envío real.
+
+## Checklist de monetización futura
+- Completar ads.txt con el identificador real del proveedor de anuncios.
+- Revisar politica-privacidad.html antes de activar anuncios o analítica adicional.
+- Agregar script de anuncios solo cuando exista publisher ID real.
+- Verificar que anuncios no rompan el layout móvil ni la velocidad de carga.
