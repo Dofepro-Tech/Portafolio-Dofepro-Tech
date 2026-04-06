@@ -52,6 +52,11 @@ La carpeta backend puede desplegarse en:
 8. Vuelve a publicar Netlify o haz un nuevo deploy para que el frontend apunte a la API real.
 9. Prueba primero la ruta /api/health de tu servicio publicado y luego el formulario desde el frontend publicado.
 
+Datos actuales del proyecto:
+- Repositorio: https://github.com/Dofepro-Tech/Portafolio-Dofepro-Tech
+- Frontend publicado: https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/
+- Blueprint abierto en Render desde ese repositorio.
+
 ## Subir el proyecto a GitHub
 Desde la raiz del proyecto puedes usar este flujo:
 
