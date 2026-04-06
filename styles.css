@@ -817,6 +817,43 @@ summary {
   font-weight: 700;
 }
 
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1rem;
+  margin-top: 1.2rem;
+}
+
+.project-links a {
+  color: var(--primary-strong);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.compact-links {
+  margin-top: 0.35rem;
+}
+
+.case-study-card {
+  min-height: 100%;
+}
+
+.case-stage + .case-stage {
+  margin-top: 1rem;
+}
+
+.case-stage strong {
+  display: inline-flex;
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
+
+.resource-card a,
+.sponsor-card a {
+  color: var(--primary-strong);
+  font-weight: 700;
+}
+
 .package-card.is-featured {
   border-color: rgba(11, 92, 255, 0.4);
   box-shadow: 0 24px 60px rgba(11, 92, 255, 0.18);
@@ -836,7 +873,8 @@ summary {
 
 .resource-card,
 .guide-card,
-.package-card {
+.package-card,
+.sponsor-card {
   min-height: 100%;
 }
 
