@@ -1631,14 +1631,34 @@ body[data-theme="dark"] .assistant-message-user {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.72rem;
-  height: 1.72rem;
+  width: 1.9rem;
+  height: 1.9rem;
   flex: 0 0 auto;
 }
 
 .assistant-toggle-icon svg {
   width: 100%;
   height: 100%;
+  overflow: visible;
+}
+
+.assistant-toggle-icon .robot-head {
+  fill: currentColor;
+  fill-opacity: 0.14;
+  stroke: currentColor;
+  stroke-width: 1.9;
+}
+
+.assistant-toggle-icon .robot-ear,
+.assistant-toggle-icon .robot-antenna-dot,
+.assistant-toggle-icon .robot-eye {
+  fill: currentColor;
+}
+
+.assistant-toggle-icon .robot-antenna-line,
+.assistant-toggle-icon .robot-mouth,
+.assistant-toggle-icon .robot-neck,
+.assistant-toggle-icon .robot-base {
   fill: none;
   stroke: currentColor;
   stroke-width: 2.05;
