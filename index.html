@@ -133,6 +133,36 @@
               En Dofepro-Tech diseño y construyo landing pages, sitios de presentación y soluciones digitales modernas con foco en claridad, credibilidad, rendimiento y crecimiento real.
             </p>
 
+            <div class="page-search page-search-hero" data-reveal="up">
+              <p class="page-search-kicker">Busqueda interna</p>
+
+              <form class="page-search-form" id="pageSearchForm" role="search" aria-label="Buscar dentro de la pagina">
+                <label class="sr-only" for="pageSearchInput">Buscar dentro de la pagina</label>
+                <div class="page-search-input-wrap">
+                  <span class="page-search-input-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                      <circle cx="10.5" cy="10.5" r="5.5"></circle>
+                      <path d="M15 15l4.5 4.5"></path>
+                    </svg>
+                  </span>
+                  <input
+                    id="pageSearchInput"
+                    type="search"
+                    name="page-search"
+                    inputmode="search"
+                    autocomplete="off"
+                    placeholder="Busca landing, automatizacion, recursos, casos o contacto"
+                  />
+                </div>
+                <button class="button button-primary" type="submit">Buscar</button>
+              </form>
+
+              <div class="page-search-feedback" aria-live="polite">
+                <p class="page-search-status" id="pageSearchStatus">Prueba con: landing, conversion, automatizacion, scraping, recursos o contacto.</p>
+                <div class="page-search-results" id="pageSearchResults" hidden></div>
+              </div>
+            </div>
+
             <div class="hero-actions">
               <a class="button button-primary" href="#contacto">Contactame</a>
               <a class="button button-secondary" href="#proyectos">Ver casos de trabajo</a>
@@ -202,40 +232,6 @@
               </div>
             </section>
           </aside>
-        </div>
-      </section>
-
-      <section class="page-search-band" aria-label="Busqueda interna del sitio">
-        <div class="container">
-          <div class="page-search" data-reveal="up">
-            <p class="page-search-kicker">Busqueda interna</p>
-
-            <form class="page-search-form" id="pageSearchForm" role="search" aria-label="Buscar dentro de la pagina">
-              <label class="sr-only" for="pageSearchInput">Buscar dentro de la pagina</label>
-              <div class="page-search-input-wrap">
-                <span class="page-search-input-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-                    <circle cx="10.5" cy="10.5" r="5.5"></circle>
-                    <path d="M15 15l4.5 4.5"></path>
-                  </svg>
-                </span>
-                <input
-                  id="pageSearchInput"
-                  type="search"
-                  name="page-search"
-                  inputmode="search"
-                  autocomplete="off"
-                  placeholder="Busca landing, automatizacion, recursos, casos o contacto"
-                />
-              </div>
-              <button class="button button-primary" type="submit">Buscar</button>
-            </form>
-
-            <div class="page-search-feedback" aria-live="polite">
-              <p class="page-search-status" id="pageSearchStatus">Prueba con: landing, conversion, automatizacion, scraping, recursos o contacto.</p>
-              <div class="page-search-results" id="pageSearchResults" hidden></div>
-            </div>
-          </div>
         </div>
       </section>
 

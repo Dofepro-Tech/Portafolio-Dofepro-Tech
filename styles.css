@@ -234,16 +234,16 @@ body.is-scrolled .site-header {
 }
 
 .page-inline-nav-home {
-  min-width: 3.9rem;
-  padding-inline: 0.82rem;
+  min-width: 4.1rem;
+  padding-inline: 0.88rem;
 }
 
 .nav-link-icon {
   display: inline-grid;
   place-items: center;
-  width: 2.15rem;
-  height: 2.15rem;
-  font-size: 1.95rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  font-size: 2.15rem;
   line-height: 1;
 }
 
@@ -866,10 +866,6 @@ body[data-theme="dark"] .package-badge {
   background: linear-gradient(135deg, rgba(255, 95, 127, 0.18), rgba(59, 130, 246, 0.08));
 }
 
-.page-search-band {
-  padding: 0.2rem 0 1rem;
-}
-
 .page-search {
   position: relative;
   display: grid;
@@ -882,6 +878,10 @@ body[data-theme="dark"] .package-badge {
     linear-gradient(180deg, color-mix(in srgb, var(--surface-strong) 88%, transparent), color-mix(in srgb, var(--surface) 92%, transparent));
   box-shadow: var(--shadow);
   overflow: hidden;
+}
+
+.page-search-hero {
+  margin: 1.35rem 0 1.6rem;
 }
 
 .page-search::after {
@@ -933,6 +933,7 @@ body[data-theme="dark"] .package-badge {
   color: var(--primary-strong);
   transform: translateY(-50%);
   pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.28));
 }
 
 .page-search-input-icon svg {
@@ -943,6 +944,19 @@ body[data-theme="dark"] .package-badge {
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.page-search-input-wrap::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  width: 1.95rem;
+  height: 1.95rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.24), rgba(96, 165, 250, 0) 70%);
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .page-search-form input {
@@ -1028,16 +1042,19 @@ body[data-theme="dark"] .package-badge {
   0% {
     box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.32);
     background-color: rgba(59, 130, 246, 0);
+    transform: translateY(0);
   }
 
   38% {
-    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.12);
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.52), 0 16px 34px rgba(59, 130, 246, 0.16);
     background-color: rgba(59, 130, 246, 0.08);
+    transform: translateY(-4px);
   }
 
   100% {
     box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
     background-color: rgba(59, 130, 246, 0);
+    transform: translateY(0);
   }
 }
 
@@ -2033,6 +2050,10 @@ body[data-theme="dark"] .floating-button:focus-visible {
   .page-search {
     padding: 0.95rem;
     border-radius: 24px;
+  }
+
+  .page-search-hero {
+    margin: 1.1rem 0 1.35rem;
   }
 
   .page-search-form {
