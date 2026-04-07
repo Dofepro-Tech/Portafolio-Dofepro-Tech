@@ -236,10 +236,15 @@ const scrollToSearchTarget = (href) => {
     return;
   }
 
+  const highlightTarget = target.querySelector(':scope > .container') || target;
+
   closeNav();
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  target.classList.add('search-target-flash');
-  window.setTimeout(() => target.classList.remove('search-target-flash'), 1600);
+  highlightTarget.classList.remove('search-target-flash');
+  window.requestAnimationFrame(() => {
+    highlightTarget.classList.add('search-target-flash');
+  });
+  window.setTimeout(() => highlightTarget.classList.remove('search-target-flash'), 1800);
 };
 
 const renderPageSearchResults = (results, query) => {
