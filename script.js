@@ -83,6 +83,7 @@ const pageSearchForm = document.querySelector('#pageSearchForm');
 const pageSearchInput = document.querySelector('#pageSearchInput');
 const pageSearchResults = document.querySelector('#pageSearchResults');
 const pageSearchStatus = document.querySelector('#pageSearchStatus');
+const contactShortcutLinks = Array.from(document.querySelectorAll('[data-contact-service]'));
 const brandLogo = document.querySelector('[data-brand-logo]');
 const brandMark = document.querySelector('.brand-mark');
 const brandTagline = document.querySelector('[data-brand-tagline]');
@@ -245,6 +246,42 @@ const scrollToSearchTarget = (href) => {
     highlightTarget.classList.add('search-target-flash');
   });
   window.setTimeout(() => highlightTarget.classList.remove('search-target-flash'), 1800);
+};
+
+const scrollToContactForm = () => {
+  const contactSection = document.querySelector('#contacto');
+  if (!contactSection) {
+    return;
+  }
+
+  const highlightTarget = contactSection.querySelector(':scope > .container') || contactSection;
+  closeAssistant();
+  closeNav();
+  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  highlightTarget.classList.remove('search-target-flash');
+  window.requestAnimationFrame(() => {
+    highlightTarget.classList.add('search-target-flash');
+  });
+  window.setTimeout(() => highlightTarget.classList.remove('search-target-flash'), 1800);
+};
+
+const applyContactShortcutPrefill = (service, triggerLabel = '') => {
+  const normalizedService = String(service || '').trim();
+  if (!serviceField || !normalizedService || !serviceLabels[normalizedService]) {
+    return;
+  }
+
+  serviceField.value = normalizedService;
+  setFieldState(serviceField);
+
+  if (prefillNote) {
+    prefillNote.hidden = false;
+    prefillNote.textContent = triggerLabel
+      ? `${triggerLabel} te llevó con ${serviceLabels[normalizedService].toLowerCase()} ya seleccionado. Puedes cambiarlo si prefieres otra opción.`
+      : `Formulario preparado para ${serviceLabels[normalizedService].toLowerCase()}. Puedes cambiarlo si prefieres otra opción.`;
+  }
+
+  saveDraft();
 };
 
 const renderPageSearchResults = (results, query) => {
@@ -798,6 +835,21 @@ if (pageSearchForm && pageSearchInput) {
     if (results.length) {
       scrollToSearchTarget(results[0].href);
     }
+  });
+}
+
+if (contactShortcutLinks.length) {
+  contactShortcutLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const service = link.getAttribute('data-contact-service') || '';
+      if (!service) {
+        return;
+      }
+
+      event.preventDefault();
+      applyContactShortcutPrefill(service, link.textContent.trim());
+      scrollToContactForm();
+    });
   });
 }
 
