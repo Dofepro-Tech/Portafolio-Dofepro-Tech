@@ -9,7 +9,7 @@
       content="Media Kit de Dofepro-Tech para colaboraciones, patrocinio, reseñas, comparativas, afiliados y propuestas comerciales alineadas con desarrollo web y herramientas digitales."
     />
     <meta name="author" content="Dofepro-Tech" />
-    <meta name="theme-color" content="#22c83a" />
+    <meta name="theme-color" content="#ff4d6d" />
     <meta property="og:title" content="Media Kit y Colaboraciones | Dofepro-Tech" />
     <meta
       property="og:description"
@@ -52,13 +52,43 @@
         </a>
 
         <div class="header-actions">
-          <a class="button button-secondary" href="index.html#colaboraciones">Volver al sitio</a>
+          <nav id="site-navigation" class="site-nav" aria-label="Accesos principales">
+            <ul class="nav-list">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="index.html#paquetes">Paquetes</a></li>
+              <li><a href="index.html#casos">Casos</a></li>
+              <li><a href="index.html#recursos">Recursos</a></li>
+              <li><a href="media-kit.html">Media Kit</a></li>
+              <li><a href="programas-afiliados.html">Afiliados</a></li>
+              <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+          </nav>
+          <nav class="page-inline-nav" aria-label="Accesos rapidos">
+            <a href="index.html#casos">Casos</a>
+            <a href="index.html#recursos">Recursos</a>
+            <a href="index.html#contacto">Contacto</a>
+          </nav>
+          <a class="button button-secondary header-link-button" href="index.html#colaboraciones">Volver al sitio</a>
           <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Cambiar tema visual">
             <span class="theme-icons" aria-hidden="true">
               <span class="theme-icon theme-icon-sun">☀</span>
               <span class="theme-icon theme-icon-moon">🌙</span>
             </span>
             <span class="theme-toggle-label">Tema</span>
+          </button>
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="site-navigation"
+            aria-label="Abrir menu de navegacion"
+          >
+            <span class="nav-toggle-bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span class="nav-toggle-text">Menu</span>
           </button>
         </div>
       </div>

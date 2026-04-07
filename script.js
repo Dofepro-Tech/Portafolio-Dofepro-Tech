@@ -179,7 +179,7 @@ const applyTheme = (theme) => {
 
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   if (themeMeta) {
-    themeMeta.setAttribute('content', theme === 'dark' ? '#08101d' : '#22c83a');
+    themeMeta.setAttribute('content', theme === 'dark' ? '#08101d' : '#ff4d6d');
   }
 };
 

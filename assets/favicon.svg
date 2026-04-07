@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Favicon Dofepro-Tech">
   <defs>
     <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#75ef6d" />
-      <stop offset="50%" stop-color="#22c83a" />
-      <stop offset="100%" stop-color="#0d7f1e" />
+      <stop offset="0%" stop-color="#ffb0bc" />
+      <stop offset="50%" stop-color="#ff4d6d" />
+      <stop offset="100%" stop-color="#b5163d" />
     </linearGradient>
     <linearGradient id="m" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0%" stop-color="#ffffff" />
