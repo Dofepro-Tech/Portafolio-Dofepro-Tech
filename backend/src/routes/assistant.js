@@ -4,6 +4,15 @@ const { createAssistantReply } = require('../lib/assistant-service');
 
 const router = express.Router();
 
+router.get('/', (_req, res) => {
+  return res.status(200).json({
+    ok: true,
+    message: 'La ruta del asistente esta activa. Usa POST para enviar una consulta real.',
+    endpoint: '/api/assistant',
+    method: 'POST'
+  });
+});
+
 router.post('/', async (req, res) => {
   const validation = validateAssistantPayload(req.body || {});
 
