@@ -7,6 +7,17 @@ const normalizeText = (value) => (typeof value === 'string' ? value.trim() : '')
 
 const clampText = (value, maxLength) => normalizeText(value).slice(0, maxLength);
 
+const getProviderHeaders = () => {
+  if (!/openrouter\.ai/i.test(config.assistant.baseUrl)) {
+    return {};
+  }
+
+  return {
+    'HTTP-Referer': 'https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/',
+    'X-Title': 'Dofepro-Tech Assistant'
+  };
+};
+
 const detectIntent = (message) => {
   const value = message.toLowerCase();
 
@@ -165,7 +176,8 @@ const requestChatCompletion = async ({ message, history, fallbackIntent }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.assistant.apiKey}`
+        Authorization: `Bearer ${config.assistant.apiKey}`,
+        ...getProviderHeaders()
       },
       signal: controller.signal,
       body: JSON.stringify({
