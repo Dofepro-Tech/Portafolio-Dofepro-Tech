@@ -93,7 +93,13 @@ const draftStorageKey = 'portfolio-contact-draft';
 const submissionStorageKey = 'portfolio-contact-last-submission';
 const themeStorageKey = 'portfolio-theme';
 const assistantConversation = [];
+const contactPrefillQueryKeys = {
+  service: 'contactService',
+  message: 'contactMessage',
+  cta: 'contactCta'
+};
 let lastAssistantPrefill = '';
+let lastContactShortcutPrefill = '';
 
 const setTextContent = (selector, value) => {
   document.querySelectorAll(selector).forEach((element) => {
@@ -265,8 +271,65 @@ const scrollToContactForm = () => {
   window.setTimeout(() => highlightTarget.classList.remove('search-target-flash'), 1800);
 };
 
-const applyContactShortcutPrefill = (service, triggerLabel = '') => {
+const getContactShortcutPayload = (source) => ({
+  service: String(source?.getAttribute?.('data-contact-service') || '').trim(),
+  message: String(source?.getAttribute?.('data-contact-message') || '').trim(),
+  ctaLabel: String(source?.textContent || '').trim()
+});
+
+const buildContactNavigationUrl = (link, payload) => {
+  const rawHref = String(link.getAttribute('href') || 'index.html#contacto').trim() || 'index.html#contacto';
+  const targetUrl = new URL(rawHref, window.location.href);
+
+  if (payload.service) {
+    targetUrl.searchParams.set(contactPrefillQueryKeys.service, payload.service);
+  }
+  if (payload.message) {
+    targetUrl.searchParams.set(contactPrefillQueryKeys.message, payload.message);
+  }
+  if (payload.ctaLabel) {
+    targetUrl.searchParams.set(contactPrefillQueryKeys.cta, payload.ctaLabel);
+  }
+
+  if (!targetUrl.hash) {
+    targetUrl.hash = '#contacto';
+  }
+
+  return targetUrl;
+};
+
+const readContactPrefillFromUrl = () => {
+  const params = new URLSearchParams(window.location.search);
+  const service = String(params.get(contactPrefillQueryKeys.service) || '').trim();
+  const message = String(params.get(contactPrefillQueryKeys.message) || '').trim();
+  const ctaLabel = String(params.get(contactPrefillQueryKeys.cta) || '').trim();
+
+  if (!service && !message) {
+    return null;
+  }
+
+  return { service, message, ctaLabel };
+};
+
+const clearContactPrefillFromUrl = () => {
+  if (!window.history.replaceState) {
+    return;
+  }
+
+  const currentUrl = new URL(window.location.href);
+  currentUrl.searchParams.delete(contactPrefillQueryKeys.service);
+  currentUrl.searchParams.delete(contactPrefillQueryKeys.message);
+  currentUrl.searchParams.delete(contactPrefillQueryKeys.cta);
+  const normalizedSearch = currentUrl.searchParams.toString();
+  const cleanUrl = `${currentUrl.pathname}${normalizedSearch ? `?${normalizedSearch}` : ''}${currentUrl.hash}`;
+  window.history.replaceState({}, document.title, cleanUrl);
+};
+
+const applyContactShortcutPrefill = ({ service, message, ctaLabel } = {}, options = {}) => {
   const normalizedService = String(service || '').trim();
+  const draftMessage = String(message || '').trim();
+  const forceMessage = options.forceMessage === true;
+
   if (!serviceField || !normalizedService || !serviceLabels[normalizedService]) {
     return;
   }
@@ -274,10 +337,21 @@ const applyContactShortcutPrefill = (service, triggerLabel = '') => {
   serviceField.value = normalizedService;
   setFieldState(serviceField);
 
+  if (messageField && draftMessage) {
+    const shouldReplace = forceMessage || !messageField.value.trim() || messageField.dataset.contactPrefill === 'true' || messageField.value.trim() === lastContactShortcutPrefill;
+    if (shouldReplace) {
+      messageField.value = draftMessage;
+      messageField.dataset.contactPrefill = 'true';
+      lastContactShortcutPrefill = draftMessage;
+      updateCharacterCount();
+      setFieldState(messageField);
+    }
+  }
+
   if (prefillNote) {
     prefillNote.hidden = false;
-    prefillNote.textContent = triggerLabel
-      ? `${triggerLabel} te llevó con ${serviceLabels[normalizedService].toLowerCase()} ya seleccionado. Puedes cambiarlo si prefieres otra opción.`
+    prefillNote.textContent = ctaLabel
+      ? `${ctaLabel} te llevó con ${serviceLabels[normalizedService].toLowerCase()} ya seleccionado. Puedes cambiarlo si prefieres otra opción.`
       : `Formulario preparado para ${serviceLabels[normalizedService].toLowerCase()}. Puedes cambiarlo si prefieres otra opción.`;
   }
 
@@ -841,14 +915,22 @@ if (pageSearchForm && pageSearchInput) {
 if (contactShortcutLinks.length) {
   contactShortcutLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
-      const service = link.getAttribute('data-contact-service') || '';
-      if (!service) {
+      const payload = getContactShortcutPayload(link);
+      if (!payload.service) {
         return;
       }
 
-      event.preventDefault();
-      applyContactShortcutPrefill(service, link.textContent.trim());
-      scrollToContactForm();
+      const targetUrl = buildContactNavigationUrl(link, payload);
+      const isSameDocument = targetUrl.pathname === window.location.pathname && targetUrl.hash === '#contacto' && Boolean(form);
+
+      if (isSameDocument) {
+        event.preventDefault();
+        applyContactShortcutPrefill(payload, { forceMessage: true });
+        scrollToContactForm();
+        return;
+      }
+
+      link.setAttribute('href', `${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
     });
   });
 }
@@ -905,6 +987,11 @@ setupRevealAnimations();
 
 if (form) {
   restoreDraft();
+  const contactPrefillFromUrl = readContactPrefillFromUrl();
+  if (contactPrefillFromUrl) {
+    applyContactShortcutPrefill(contactPrefillFromUrl, { forceMessage: true });
+    clearContactPrefillFromUrl();
+  }
   updateCharacterCount();
 
   fields.forEach((field) => {
@@ -913,6 +1000,7 @@ if (form) {
       saveDraft();
       if (field === messageField) {
         field.dataset.assistantPrefill = 'false';
+        field.dataset.contactPrefill = 'false';
       }
       if (field === messageField) {
         updateCharacterCount();
