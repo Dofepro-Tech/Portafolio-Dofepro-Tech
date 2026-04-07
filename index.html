@@ -71,7 +71,7 @@
 
         <div class="header-actions">
           <nav class="page-inline-nav" aria-label="Accesos rapidos">
-            <a href="#inicio"><span class="nav-link-icon" aria-hidden="true">⌂</span><span>Inicio</span></a>
+            <a class="page-inline-nav-home" href="#inicio" aria-label="Inicio" title="Inicio"><span class="nav-link-icon" aria-hidden="true">⌂</span></a>
             <a href="#servicios">Servicios</a>
             <a href="#proposito">Mision y vision</a>
             <a href="#casos">Casos</a>
@@ -128,6 +128,7 @@
           <div class="hero-copy" data-reveal="up">
             <p class="eyebrow">Dofepro-Tech | Innovacion Tecnologica Moderna</p>
             <h1 id="hero-title">Diseño y desarrollo experiencias web que se ven profesionales y convierten mejor.</h1>
+            <p class="hero-signature" aria-label="Referencia inspiracional">Jehová Jireh <span>(Gen. 22:14)</span></p>
             <p class="hero-text">
               En Dofepro-Tech diseño y construyo landing pages, sitios de presentación y soluciones digitales modernas con foco en claridad, credibilidad, rendimiento y crecimiento real.
             </p>
@@ -201,6 +202,33 @@
               </div>
             </section>
           </aside>
+        </div>
+      </section>
+
+      <section class="page-search-band" aria-label="Busqueda interna del sitio">
+        <div class="container">
+          <div class="page-search" data-reveal="up">
+            <p class="page-search-kicker">Busqueda interna</p>
+
+            <form class="page-search-form" id="pageSearchForm" role="search" aria-label="Buscar dentro de la pagina">
+              <span class="page-search-icon" aria-hidden="true">⌕</span>
+              <label class="sr-only" for="pageSearchInput">Buscar dentro de la pagina</label>
+              <input
+                id="pageSearchInput"
+                type="search"
+                name="page-search"
+                inputmode="search"
+                autocomplete="off"
+                placeholder="Busca landing, automatizacion, recursos, casos o contacto"
+              />
+              <button class="button button-primary" type="submit">Buscar</button>
+            </form>
+
+            <div class="page-search-feedback" aria-live="polite">
+              <p class="page-search-status" id="pageSearchStatus">Prueba con: landing, conversion, automatizacion, scraping, recursos o contacto.</p>
+              <div class="page-search-results" id="pageSearchResults" hidden></div>
+            </div>
+          </div>
         </div>
       </section>
 

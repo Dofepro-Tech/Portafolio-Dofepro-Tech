@@ -79,6 +79,10 @@ const assistantInput = document.querySelector('#assistantInput');
 const assistantMessages = document.querySelector('#assistantMessages');
 const assistantChips = Array.from(document.querySelectorAll('[data-assistant-prompt]'));
 const assistantSendButton = assistantForm ? assistantForm.querySelector('button[type="submit"]') : null;
+const pageSearchForm = document.querySelector('#pageSearchForm');
+const pageSearchInput = document.querySelector('#pageSearchInput');
+const pageSearchResults = document.querySelector('#pageSearchResults');
+const pageSearchStatus = document.querySelector('#pageSearchStatus');
 const brandLogo = document.querySelector('[data-brand-logo]');
 const brandMark = document.querySelector('.brand-mark');
 const brandTagline = document.querySelector('[data-brand-tagline]');
@@ -156,6 +160,136 @@ const serviceLabels = {
   asesoria: 'Asesoría técnica',
   redisenio: 'Rediseño visual',
   mantenimiento: 'Soporte o mejora continua'
+};
+
+const pageSearchSectionIds = ['inicio', 'servicios', 'proposito', 'paquetes', 'stack', 'proceso', 'impacto', 'proyectos', 'casos', 'recursos', 'guias', 'testimonios', 'contacto'];
+
+const normalizeSearchValue = (value) => String(value || '')
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .toLowerCase()
+  .trim();
+
+const createPageSearchIndex = () => pageSearchSectionIds
+  .map((sectionId) => {
+    const section = document.querySelector(`#${sectionId}`);
+    if (!section) {
+      return null;
+    }
+
+    const titleElement = section.querySelector('h1, h2, h3');
+    const labelElement = section.querySelector('.eyebrow');
+    const descriptionElement = Array.from(section.querySelectorAll('p')).find((paragraph) => paragraph.textContent.trim());
+    const title = titleElement?.textContent.trim() || sectionId;
+    const label = labelElement?.textContent.trim() || 'Seccion';
+    const description = descriptionElement?.textContent.trim() || '';
+    const searchableText = normalizeSearchValue(`${label} ${title} ${description} ${section.textContent}`);
+
+    return {
+      href: `#${sectionId}`,
+      label,
+      title,
+      description,
+      searchableText
+    };
+  })
+  .filter(Boolean);
+
+const pageSearchIndex = createPageSearchIndex();
+
+const searchPageSections = (query) => {
+  const normalizedQuery = normalizeSearchValue(query);
+  if (!normalizedQuery) {
+    return [];
+  }
+
+  const terms = normalizedQuery.split(/\s+/).filter(Boolean);
+
+  return pageSearchIndex
+    .map((item) => {
+      const titleValue = normalizeSearchValue(item.title);
+      const labelValue = normalizeSearchValue(item.label);
+      let score = 0;
+
+      terms.forEach((term) => {
+        if (titleValue.includes(term)) {
+          score += 6;
+        }
+        if (labelValue.includes(term)) {
+          score += 3;
+        }
+        if (item.searchableText.includes(term)) {
+          score += 1;
+        }
+      });
+
+      return { ...item, score };
+    })
+    .filter((item) => item.score > 0)
+    .sort((left, right) => right.score - left.score)
+    .slice(0, 5);
+};
+
+const scrollToSearchTarget = (href) => {
+  const target = document.querySelector(href);
+  if (!target) {
+    return;
+  }
+
+  closeNav();
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  target.classList.add('search-target-flash');
+  window.setTimeout(() => target.classList.remove('search-target-flash'), 1600);
+};
+
+const renderPageSearchResults = (results, query) => {
+  if (!pageSearchResults || !pageSearchStatus) {
+    return;
+  }
+
+  pageSearchResults.innerHTML = '';
+
+  if (!query) {
+    pageSearchResults.hidden = true;
+    pageSearchStatus.textContent = 'Prueba con: landing, conversion, automatizacion, scraping, recursos o contacto.';
+    return;
+  }
+
+  if (!results.length) {
+    pageSearchResults.hidden = true;
+    pageSearchStatus.textContent = 'No encontre coincidencias. Prueba con otra palabra o ve al contacto.';
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  results.forEach((result) => {
+    const anchor = document.createElement('a');
+    anchor.className = 'page-search-result';
+    anchor.href = result.href;
+
+    const tag = document.createElement('span');
+    tag.className = 'page-search-result-tag';
+    tag.textContent = result.label;
+
+    const title = document.createElement('strong');
+    title.textContent = result.title;
+
+    const description = document.createElement('span');
+    description.textContent = result.description || 'Ir a esta seccion';
+
+    anchor.append(tag, title, description);
+    anchor.addEventListener('click', (event) => {
+      event.preventDefault();
+      scrollToSearchTarget(result.href);
+    });
+
+    fragment.appendChild(anchor);
+  });
+
+  pageSearchResults.appendChild(fragment);
+  pageSearchResults.hidden = false;
+  pageSearchStatus.textContent = `${results.length} resultado${results.length === 1 ? '' : 's'} para "${query}".`;
 };
 
 const appendAssistantMessage = (role, text, links = []) => {
@@ -642,6 +776,24 @@ if (navToggle && siteNav) {
 
 if (themeToggle) {
   themeToggle.addEventListener('click', toggleTheme);
+}
+
+if (pageSearchForm && pageSearchInput) {
+  pageSearchInput.addEventListener('input', () => {
+    const query = pageSearchInput.value.trim();
+    renderPageSearchResults(searchPageSections(query), query);
+  });
+
+  pageSearchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const query = pageSearchInput.value.trim();
+    const results = searchPageSections(query);
+    renderPageSearchResults(results, query);
+
+    if (results.length) {
+      scrollToSearchTarget(results[0].href);
+    }
+  });
 }
 
 if (assistantToggle && assistantPanel) {
