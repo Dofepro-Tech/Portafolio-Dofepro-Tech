@@ -59,6 +59,14 @@ const themeToggle = document.querySelector('#themeToggle');
 const themeToggleLabel = document.querySelector('.theme-toggle-label');
 const scrollTopButton = document.querySelector('#scrollTopButton');
 const scrollProgressBar = document.querySelector('#scrollProgressBar');
+const assistantShell = document.querySelector('#assistantShell');
+const assistantPanel = document.querySelector('#assistantPanel');
+const assistantToggle = document.querySelector('#assistantToggle');
+const assistantClose = document.querySelector('#assistantClose');
+const assistantForm = document.querySelector('#assistantForm');
+const assistantInput = document.querySelector('#assistantInput');
+const assistantMessages = document.querySelector('#assistantMessages');
+const assistantChips = Array.from(document.querySelectorAll('[data-assistant-prompt]'));
 const brandLogo = document.querySelector('[data-brand-logo]');
 const brandMark = document.querySelector('.brand-mark');
 const brandTagline = document.querySelector('[data-brand-tagline]');
@@ -99,18 +107,163 @@ const updateApiStatus = () => {
   }
 
   if (appConfig.contact.formMode !== 'api') {
-    status.textContent = 'Contacto por correo mientras se activa el formulario en linea';
+    status.textContent = 'Correo directo disponible';
     return;
   }
 
-  if (getApiBaseUrl()) {
-    status.textContent = isAbsoluteUrl(getApiBaseUrl())
-      ? 'API configurada con URL externa'
-      : 'API configurada con ruta relativa';
+  status.textContent = 'Formulario y correo activos';
+};
+
+const assistantReplies = [
+  {
+    test: /servicio|landing|sitio|web|automat/i,
+    text: 'Dofepro-Tech trabaja landing pages, sitios informativos, automatización, rediseño visual y mejoras técnicas para proyectos ya publicados.',
+    links: [
+      { label: 'Ver servicios', href: '#servicios' },
+      { label: 'Ver paquetes', href: '#paquetes' }
+    ]
+  },
+  {
+    test: /precio|costo|cotiza|paquete|plan/i,
+    text: 'La mejor forma de cotizar es según objetivo, alcance y tiempos. Ya hay paquetes base visibles para que tengas una referencia rápida.',
+    links: [
+      { label: 'Ver paquetes', href: '#paquetes' },
+      { label: 'Solicitar propuesta', href: '#contacto' }
+    ]
+  },
+  {
+    test: /tiempo|plazo|demora|cuando|cu[aá]nto/i,
+    text: 'Los tiempos cambian según la complejidad, pero el sitio ya indica una respuesta inicial estimada dentro de 24 horas para organizar el siguiente paso.',
+    links: [
+      { label: 'Ir al contacto', href: '#contacto' },
+      { label: 'Ver proceso', href: '#proceso' }
+    ]
+  },
+  {
+    test: /proyecto|portafolio|caso|github|repo/i,
+    text: 'Ya hay proyectos públicos enlazados dentro del portafolio para revisar enfoque técnico, estructura y tipo de solución desarrollada.',
+    links: [
+      { label: 'Ver proyectos', href: '#proyectos' },
+      { label: 'Ver casos', href: '#casos' }
+    ]
+  },
+  {
+    test: /seo|google|busqueda|buscar|index/i,
+    text: 'Además de construir la parte visual, el sitio incorpora base SEO, recursos y contenidos pensados para ganar más visibilidad en búsquedas.',
+    links: [
+      { label: 'Ver recursos', href: '#recursos' },
+      { label: 'Leer guía', href: 'guia-landing-negocio.html' }
+    ]
+  },
+  {
+    test: /contacto|correo|hablar|escribir/i,
+    text: 'Puedes escribir directamente desde el formulario o usar el correo principal. Si explicas tu objetivo con contexto, la respuesta puede ser más concreta desde el primer mensaje.',
+    links: [
+      { label: 'Contactar ahora', href: '#contacto' }
+    ]
+  },
+  {
+    test: /ia|asistente|bot/i,
+    text: 'Este asistente es la primera versión integrada en la landing: responde dudas frecuentes, guía a secciones clave y acelera el contacto inicial.',
+    links: [
+      { label: 'Ver servicios', href: '#servicios' },
+      { label: 'Ir al contacto', href: '#contacto' }
+    ]
+  }
+];
+
+const appendAssistantMessage = (role, text, links = []) => {
+  if (!assistantMessages) {
     return;
   }
 
-  status.textContent = 'API configurada para mismo dominio o proxy';
+  const article = document.createElement('article');
+  article.className = `assistant-message ${role === 'user' ? 'assistant-message-user' : 'assistant-message-bot'}`;
+
+  const paragraph = document.createElement('p');
+  paragraph.textContent = text;
+  article.appendChild(paragraph);
+
+  if (links.length) {
+    const actions = document.createElement('div');
+    actions.className = 'assistant-message-links';
+
+    links.forEach((link) => {
+      const anchor = document.createElement('a');
+      anchor.href = link.href;
+      anchor.textContent = link.label;
+      if (/^https?:\/\//i.test(link.href)) {
+        anchor.target = '_blank';
+        anchor.rel = 'noreferrer noopener';
+      } else {
+        anchor.addEventListener('click', () => {
+          closeAssistant();
+          closeNav();
+        });
+      }
+      actions.appendChild(anchor);
+    });
+
+    article.appendChild(actions);
+  }
+
+  assistantMessages.appendChild(article);
+  assistantMessages.scrollTop = assistantMessages.scrollHeight;
+};
+
+const getAssistantReply = (input) => {
+  const normalizedInput = input.trim();
+  if (!normalizedInput) {
+    return {
+      text: 'Puedes preguntarme por servicios, proyectos, tiempos, SEO o contacto.',
+      links: [{ label: 'Ver servicios', href: '#servicios' }]
+    };
+  }
+
+  const matchingReply = assistantReplies.find((entry) => entry.test.test(normalizedInput));
+  if (matchingReply) {
+    return matchingReply;
+  }
+
+  return {
+    text: 'Puedo orientarte rápidamente sobre servicios, proyectos visibles, tiempos de trabajo, recursos y la mejor forma de iniciar una conversación.',
+    links: [
+      { label: 'Ver proyectos', href: '#proyectos' },
+      { label: 'Ir al contacto', href: '#contacto' }
+    ]
+  };
+};
+
+const openAssistant = () => {
+  if (!assistantShell || !assistantPanel || !assistantToggle) {
+    return;
+  }
+
+  assistantShell.classList.add('is-open');
+  assistantPanel.hidden = false;
+  assistantToggle.setAttribute('aria-expanded', 'true');
+  if (assistantInput) {
+    assistantInput.focus();
+  }
+};
+
+const closeAssistant = () => {
+  if (!assistantShell || !assistantPanel || !assistantToggle) {
+    return;
+  }
+
+  assistantShell.classList.remove('is-open');
+  assistantToggle.setAttribute('aria-expanded', 'false');
+  assistantPanel.hidden = true;
+};
+
+const toggleAssistant = () => {
+  const isOpen = assistantShell?.classList.contains('is-open');
+  if (isOpen) {
+    closeAssistant();
+  } else {
+    openAssistant();
+  }
 };
 
 const hydrateSiteConfig = () => {
@@ -412,6 +565,51 @@ if (navToggle && siteNav) {
 
 if (themeToggle) {
   themeToggle.addEventListener('click', toggleTheme);
+}
+
+if (assistantToggle && assistantPanel) {
+  assistantToggle.addEventListener('click', toggleAssistant);
+  assistantClose?.addEventListener('click', closeAssistant);
+
+  assistantChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const prompt = chip.getAttribute('data-assistant-prompt') || '';
+      appendAssistantMessage('user', prompt);
+      const reply = getAssistantReply(prompt);
+      appendAssistantMessage('bot', reply.text, reply.links);
+      openAssistant();
+    });
+  });
+
+  assistantForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const prompt = String(assistantInput?.value || '').trim();
+    if (!prompt) {
+      return;
+    }
+
+    appendAssistantMessage('user', prompt);
+    const reply = getAssistantReply(prompt);
+    appendAssistantMessage('bot', reply.text, reply.links);
+    assistantForm.reset();
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) {
+      return;
+    }
+
+    if (assistantShell.classList.contains('is-open') && !assistantShell.contains(target)) {
+      closeAssistant();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeAssistant();
+    }
+  });
 }
 
 if (scrollTopButton) {
