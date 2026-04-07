@@ -8,12 +8,12 @@
   --text: #0e1728;
   --text-soft: #45607d;
   --text-inverse: #dfe8f8;
-  --primary: #0b5cff;
-  --primary-strong: #0039bf;
-  --accent: #77d7ff;
-  --accent-strong: #15b7ff;
-  --border: rgba(95, 146, 255, 0.2);
-  --border-strong: rgba(95, 146, 255, 0.32);
+  --primary: #22c83a;
+  --primary-strong: #0f961f;
+  --accent: #77ee6e;
+  --accent-strong: #45dd45;
+  --border: rgba(70, 180, 72, 0.2);
+  --border-strong: rgba(70, 180, 72, 0.32);
   --success: #0f766e;
   --error: #c81e1e;
   --shadow: 0 24px 60px rgba(10, 24, 53, 0.12);
@@ -34,12 +34,12 @@ body[data-theme="dark"] {
   --text: #edf4ff;
   --text-soft: #a4b8d6;
   --text-inverse: #dfe8f8;
-  --primary: #73b6ff;
-  --primary-strong: #9fd0ff;
-  --accent: #37d6ff;
-  --accent-strong: #7ce8ff;
-  --border: rgba(124, 180, 255, 0.2);
-  --border-strong: rgba(124, 180, 255, 0.35);
+  --primary: #72eb79;
+  --primary-strong: #9ef6a5;
+  --accent: #4dde57;
+  --accent-strong: #88f492;
+  --border: rgba(110, 220, 120, 0.2);
+  --border-strong: rgba(110, 220, 120, 0.35);
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
   --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.24);
 }
@@ -58,9 +58,9 @@ body {
   font-family: "Source Sans 3", sans-serif;
   line-height: 1.6;
   background:
-    radial-gradient(circle at 10% 8%, rgba(11, 92, 255, 0.16), transparent 24%),
-    radial-gradient(circle at 86% 2%, rgba(119, 215, 255, 0.22), transparent 18%),
-    linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 88%, #dfeeff 12%) 100%);
+    radial-gradient(circle at 10% 8%, rgba(34, 200, 58, 0.16), transparent 24%),
+    radial-gradient(circle at 86% 2%, rgba(119, 238, 110, 0.22), transparent 18%),
+    linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 88%, #e6f9e7 12%) 100%);
   transition: background 220ms ease, color 220ms ease;
 }
 
@@ -121,7 +121,7 @@ textarea {
   transform: scaleX(0);
   transform-origin: left center;
   background: linear-gradient(90deg, var(--primary), var(--accent));
-  box-shadow: 0 0 18px rgba(11, 92, 255, 0.4);
+  box-shadow: 0 0 18px rgba(34, 200, 58, 0.4);
 }
 
 .site-header {
@@ -165,7 +165,7 @@ body.is-scrolled .site-header {
   height: 3rem;
   object-fit: contain;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(119, 215, 255, 0.16), transparent 55%), var(--surface-strong);
+  background: radial-gradient(circle at 30% 30%, rgba(119, 238, 110, 0.16), transparent 55%), var(--surface-strong);
   box-shadow: var(--shadow-soft);
   padding: 0.15rem;
 }
@@ -179,7 +179,7 @@ body.is-scrolled .site-header {
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   color: #ffffff;
-  box-shadow: 0 14px 24px rgba(11, 92, 255, 0.24);
+  box-shadow: 0 14px 24px rgba(34, 200, 58, 0.24);
 }
 
 .header-actions {
@@ -390,7 +390,7 @@ body[data-theme="dark"] .theme-icon-moon {
   right: -4rem;
   width: 18rem;
   height: 18rem;
-  background: radial-gradient(circle, rgba(11, 92, 255, 0.26), transparent 68%);
+  background: radial-gradient(circle, rgba(34, 200, 58, 0.26), transparent 68%);
 }
 
 .hero-orb-two {
@@ -398,7 +398,7 @@ body[data-theme="dark"] .theme-icon-moon {
   left: -5rem;
   width: 16rem;
   height: 16rem;
-  background: radial-gradient(circle, rgba(119, 215, 255, 0.24), transparent 65%);
+  background: radial-gradient(circle, rgba(119, 238, 110, 0.24), transparent 65%);
 }
 
 .hero-grid,
@@ -492,7 +492,7 @@ summary {
   height: 0.7rem;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--accent));
-  box-shadow: 0 0 0 6px rgba(11, 92, 255, 0.08);
+  box-shadow: 0 0 0 6px rgba(34, 200, 58, 0.08);
 }
 
 .button {
@@ -517,7 +517,7 @@ summary {
 .button-primary {
   color: #ffffff;
   background: linear-gradient(135deg, var(--primary), var(--accent-strong));
-  box-shadow: 0 18px 36px rgba(11, 92, 255, 0.24);
+  box-shadow: 0 18px 36px rgba(34, 200, 58, 0.24);
 }
 
 .button-secondary {
@@ -592,7 +592,7 @@ summary {
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(119, 215, 255, 0.26), transparent 68%);
+  background: radial-gradient(circle, rgba(119, 238, 110, 0.26), transparent 68%);
   pointer-events: none;
 }
 
@@ -855,8 +855,8 @@ summary {
 }
 
 .package-card.is-featured {
-  border-color: rgba(11, 92, 255, 0.4);
-  box-shadow: 0 24px 60px rgba(11, 92, 255, 0.18);
+  border-color: rgba(34, 200, 58, 0.4);
+  box-shadow: 0 24px 60px rgba(34, 200, 58, 0.18);
 }
 
 .package-badge {
@@ -865,7 +865,7 @@ summary {
   margin-bottom: 0.85rem;
   padding: 0.45rem 0.8rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, rgba(11, 92, 255, 0.12), rgba(119, 215, 255, 0.2));
+  background: linear-gradient(135deg, rgba(34, 200, 58, 0.12), rgba(119, 238, 110, 0.2));
   color: var(--primary-strong);
   font-size: 0.82rem;
   font-weight: 700;
@@ -999,12 +999,12 @@ summary {
   position: absolute;
   top: 0.8rem;
   right: 1rem;
-  color: rgba(11, 92, 255, 0.16);
+  color: rgba(34, 200, 58, 0.16);
   font-size: 3rem;
 }
 
 body[data-theme="dark"] .quote-card::before {
-  color: rgba(119, 215, 255, 0.18);
+  color: rgba(119, 238, 110, 0.18);
 }
 
 .faq-card details {
@@ -1092,7 +1092,7 @@ body[data-theme="dark"] .quote-card::before {
 .contact-points a:focus-visible,
 .faq-card summary:focus-visible,
 .floating-button:focus-visible {
-  outline: 3px solid rgba(103, 216, 255, 0.42);
+  outline: 3px solid rgba(119, 238, 110, 0.42);
   outline-offset: 2px;
 }
 
@@ -1100,7 +1100,7 @@ body[data-theme="dark"] .quote-card::before {
 .field-group select:focus,
 .field-group textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 6px rgba(11, 92, 255, 0.08);
+  box-shadow: 0 0 0 6px rgba(34, 200, 58, 0.08);
 }
 
 .field-group input[aria-invalid="true"],
@@ -1245,7 +1245,7 @@ body[data-theme="dark"] .quote-card::before {
 
 .floating-button:hover,
 .floating-button:focus-visible {
-  box-shadow: 0 18px 28px rgba(11, 92, 255, 0.2);
+  box-shadow: 0 18px 28px rgba(34, 200, 58, 0.2);
   background: linear-gradient(135deg, var(--primary), var(--accent));
   color: #ffffff;
 }

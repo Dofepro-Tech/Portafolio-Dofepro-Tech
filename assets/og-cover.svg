@@ -2,13 +2,13 @@
   <defs>
     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0%" stop-color="#071120"/>
-      <stop offset="50%" stop-color="#0a1f3d"/>
+      <stop offset="50%" stop-color="#102d16"/>
       <stop offset="100%" stop-color="#071120"/>
     </linearGradient>
     <linearGradient id="ringA" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#37d6ff"/>
-      <stop offset="45%" stop-color="#0b84ff"/>
-      <stop offset="100%" stop-color="#032a9e"/>
+      <stop offset="0%" stop-color="#75ef6d"/>
+      <stop offset="45%" stop-color="#22c83a"/>
+      <stop offset="100%" stop-color="#0d7f1e"/>
     </linearGradient>
     <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0%" stop-color="#ffffff"/>
@@ -17,16 +17,16 @@
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
   <circle cx="235" cy="315" r="150" fill="none" stroke="url(#ringA)" stroke-width="16"/>
-  <circle cx="235" cy="315" r="132" fill="none" stroke="#5dcfff" stroke-opacity="0.55" stroke-width="4"/>
+  <circle cx="235" cy="315" r="132" fill="none" stroke="#8cf58a" stroke-opacity="0.55" stroke-width="4"/>
   <path d="M135 274c42-44 110-57 173-23-17-2-33 2-46 12h-91c-14 0-27 4-36 11z" fill="url(#ringA)"/>
   <path d="M312 232c-3 35-27 57-57 69 35 6 62-11 80-50-5-8-13-15-23-19z" fill="url(#metal)"/>
   <path d="M137 349c26 53 91 72 156 50-39 3-66-3-89-22-21-17-41-23-67-28z" fill="url(#ringA)"/>
   <rect x="159" y="263" width="86" height="24" rx="4" fill="url(#ringA)"/>
   <path d="M187 287h22v54h-22z" fill="url(#metal)"/>
   <path d="M218 287h22v54h-22z" fill="url(#metal)"/>
-  <text x="430" y="255" fill="#78dfff" font-family="Space Grotesk, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="6">DOFEPRO-TECH</text>
+  <text x="430" y="255" fill="#8cf58a" font-family="Space Grotesk, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="6">DOFEPRO-TECH</text>
   <text x="430" y="340" fill="#ffffff" font-family="Space Grotesk, Arial, sans-serif" font-size="68" font-weight="700">Innovacion Tecnologica Moderna</text>
   <text x="430" y="400" fill="#a7bddc" font-family="Source Sans 3, Arial, sans-serif" font-size="30">Landing profesional, portafolio real y contacto listo para crecer.</text>
-  <rect x="430" y="445" width="210" height="56" rx="28" fill="#0b84ff"/>
+  <rect x="430" y="445" width="210" height="56" rx="28" fill="#22c83a"/>
   <text x="535" y="481" text-anchor="middle" fill="#ffffff" font-family="Space Grotesk, Arial, sans-serif" font-size="24" font-weight="700">dofepro-tech</text>
 </svg>
