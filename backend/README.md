@@ -4,6 +4,7 @@ API Node.js + Express lista para conectar el formulario del portafolio a un envi
 
 ## Que resuelve
 - Endpoint POST /api/contact para recibir formularios.
+- Endpoint POST /api/assistant para responder consultas con IA.
 - Validacion de datos en servidor.
 - Honeypot antispam.
 - Rate limit basico por IP.
@@ -16,6 +17,7 @@ API Node.js + Express lista para conectar el formulario del portafolio a un envi
 3. Mientras no tengas credenciales, deja EMAIL_DELIVERY_MODE=log.
 4. Cuando vayas a produccion, cambia a EMAIL_DELIVERY_MODE=resend y completa RESEND_API_KEY, CONTACT_TO_EMAIL y CONTACT_FROM_EMAIL.
 5. Para Resend, usa un remitente bajo un dominio verificado por ti. No conviene usar Gmail como CONTACT_FROM_EMAIL en produccion.
+6. Para el asistente IA, define AI_API_KEY y, si usas otro proveedor compatible, tambien AI_BASE_URL y AI_MODEL.
 
 ## Comandos
 - npm install
@@ -41,6 +43,7 @@ Si el backend queda en otro dominio, entonces usa la URL real de tu servicio pub
 ## Endpoints
 - GET /api/health
 - POST /api/contact
+- POST /api/assistant
 
 ## Payload esperado
 {
@@ -53,3 +56,22 @@ Si el backend queda en otro dominio, entonces usa la URL real de tu servicio pub
   "website": "",
   "source": "portfolio-landing"
 }
+
+## Payload del asistente
+{
+  "message": "Necesito una landing para captar clientes.",
+  "history": [
+    {
+      "role": "user",
+      "content": "Quiero mejorar mi sitio"
+    }
+  ]
+}
+
+## Variables IA compatibles
+- AI_API_KEY
+- AI_BASE_URL (opcional, por defecto OpenAI)
+- AI_MODEL (opcional, por defecto gpt-4.1-mini)
+- AI_MAX_TOKENS (opcional)
+- AI_TEMPERATURE (opcional)
+- AI_TIMEOUT_MS (opcional)

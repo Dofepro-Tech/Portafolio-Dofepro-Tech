@@ -20,6 +20,11 @@ const defaultConfig = {
     apiBaseUrl: '',
     endpointPath: '/api/contact',
     allowLocalFallback: true
+  },
+  assistant: {
+    enabled: false,
+    apiBaseUrl: '',
+    endpointPath: '/api/assistant'
   }
 };
 
@@ -42,6 +47,10 @@ const appConfig = window.PORTFOLIO_CONFIG
       contact: {
         ...defaultConfig.contact,
         ...window.PORTFOLIO_CONFIG.contact
+      },
+      assistant: {
+        ...defaultConfig.assistant,
+        ...window.PORTFOLIO_CONFIG.assistant
       }
     }
   : defaultConfig;
@@ -52,6 +61,8 @@ const messageField = document.querySelector('#mensaje');
 const charCount = document.querySelector('#charCount');
 const submitButton = document.querySelector('#submitButton');
 const submitLabel = document.querySelector('[data-submit-label]');
+const serviceField = document.querySelector('#servicio');
+const prefillNote = document.querySelector('#assistantPrefillNote');
 const navToggle = document.querySelector('.nav-toggle');
 const siteNav = document.querySelector('.site-nav');
 const currentYear = document.querySelector('#currentYear');
@@ -67,6 +78,7 @@ const assistantForm = document.querySelector('#assistantForm');
 const assistantInput = document.querySelector('#assistantInput');
 const assistantMessages = document.querySelector('#assistantMessages');
 const assistantChips = Array.from(document.querySelectorAll('[data-assistant-prompt]'));
+const assistantSendButton = assistantForm ? assistantForm.querySelector('button[type="submit"]') : null;
 const brandLogo = document.querySelector('[data-brand-logo]');
 const brandMark = document.querySelector('.brand-mark');
 const brandTagline = document.querySelector('[data-brand-tagline]');
@@ -75,6 +87,8 @@ const fields = form ? Array.from(form.querySelectorAll('input, select, textarea'
 const draftStorageKey = 'portfolio-contact-draft';
 const submissionStorageKey = 'portfolio-contact-last-submission';
 const themeStorageKey = 'portfolio-theme';
+const assistantConversation = [];
+let lastAssistantPrefill = '';
 
 const setTextContent = (selector, value) => {
   document.querySelectorAll(selector).forEach((element) => {
@@ -100,6 +114,13 @@ const getEndpointPath = () => {
   return endpointPath.startsWith('/') ? endpointPath : `/${endpointPath}`;
 };
 
+const getAssistantApiBaseUrl = () => String(appConfig.assistant?.apiBaseUrl || appConfig.contact.apiBaseUrl || '').trim();
+
+const getAssistantEndpointPath = () => {
+  const endpointPath = String(appConfig.assistant?.endpointPath || '/api/assistant').trim();
+  return endpointPath.startsWith('/') ? endpointPath : `/${endpointPath}`;
+};
+
 const updateApiStatus = () => {
   const status = document.querySelector('[data-api-status]');
   if (!status) {
@@ -114,63 +135,28 @@ const updateApiStatus = () => {
   status.textContent = 'Formulario y correo activos';
 };
 
-const assistantReplies = [
-  {
-    test: /servicio|landing|sitio|web|automat/i,
-    text: 'Dofepro-Tech trabaja landing pages, sitios informativos, automatización, rediseño visual y mejoras técnicas para proyectos ya publicados.',
-    links: [
-      { label: 'Ver servicios', href: '#servicios' },
-      { label: 'Ver paquetes', href: '#paquetes' }
-    ]
-  },
-  {
-    test: /precio|costo|cotiza|paquete|plan/i,
-    text: 'La mejor forma de cotizar es según objetivo, alcance y tiempos. Ya hay paquetes base visibles para que tengas una referencia rápida.',
-    links: [
-      { label: 'Ver paquetes', href: '#paquetes' },
-      { label: 'Solicitar propuesta', href: '#contacto' }
-    ]
-  },
-  {
-    test: /tiempo|plazo|demora|cuando|cu[aá]nto/i,
-    text: 'Los tiempos cambian según la complejidad, pero el sitio ya indica una respuesta inicial estimada dentro de 24 horas para organizar el siguiente paso.',
-    links: [
-      { label: 'Ir al contacto', href: '#contacto' },
-      { label: 'Ver proceso', href: '#proceso' }
-    ]
-  },
-  {
-    test: /proyecto|portafolio|caso|github|repo/i,
-    text: 'Ya hay proyectos públicos enlazados dentro del portafolio para revisar enfoque técnico, estructura y tipo de solución desarrollada.',
-    links: [
-      { label: 'Ver proyectos', href: '#proyectos' },
-      { label: 'Ver casos', href: '#casos' }
-    ]
-  },
-  {
-    test: /seo|google|busqueda|buscar|index/i,
-    text: 'Además de construir la parte visual, el sitio incorpora base SEO, recursos y contenidos pensados para ganar más visibilidad en búsquedas.',
-    links: [
-      { label: 'Ver recursos', href: '#recursos' },
-      { label: 'Leer guía', href: 'guia-landing-negocio.html' }
-    ]
-  },
-  {
-    test: /contacto|correo|hablar|escribir/i,
-    text: 'Puedes escribir directamente desde el formulario o usar el correo principal. Si explicas tu objetivo con contexto, la respuesta puede ser más concreta desde el primer mensaje.',
-    links: [
-      { label: 'Contactar ahora', href: '#contacto' }
-    ]
-  },
-  {
-    test: /ia|asistente|bot/i,
-    text: 'Este asistente es la primera versión integrada en la landing: responde dudas frecuentes, guía a secciones clave y acelera el contacto inicial.',
-    links: [
-      { label: 'Ver servicios', href: '#servicios' },
-      { label: 'Ir al contacto', href: '#contacto' }
-    ]
-  }
-];
+const focusSectionLinks = {
+  servicios: { label: 'Ver servicios', href: '#servicios' },
+  paquetes: { label: 'Ver paquetes', href: '#paquetes' },
+  stack: { label: 'Ver capacidades', href: '#stack' },
+  proyectos: { label: 'Ver proyectos', href: '#proyectos' },
+  casos: { label: 'Ver casos', href: '#casos' },
+  recursos: { label: 'Ver recursos', href: '#recursos' },
+  guias: { label: 'Leer guías', href: '#guias' },
+  contacto: { label: 'Ir al contacto', href: '#contacto' },
+  proposito: { label: 'Ver propósito', href: '#proposito' },
+  impacto: { label: 'Ver logros', href: '#impacto' }
+};
+
+const serviceLabels = {
+  landing: 'Landing page',
+  'sitio-web': 'Sitio web informativo',
+  auditoria: 'Auditoría web o de conversión',
+  automatizacion: 'Automatización o integración',
+  asesoria: 'Asesoría técnica',
+  redisenio: 'Rediseño visual',
+  mantenimiento: 'Soporte o mejora continua'
+};
 
 const appendAssistantMessage = (role, text, links = []) => {
   if (!assistantMessages) {
@@ -211,27 +197,118 @@ const appendAssistantMessage = (role, text, links = []) => {
   assistantMessages.scrollTop = assistantMessages.scrollHeight;
 };
 
-const getAssistantReply = (input) => {
-  const normalizedInput = input.trim();
-  if (!normalizedInput) {
-    return {
-      text: 'Puedes preguntarme por servicios, proyectos, tiempos, SEO o contacto.',
-      links: [{ label: 'Ver servicios', href: '#servicios' }]
-    };
+const canUseAssistantApi = () => Boolean(appConfig.assistant?.enabled && getAssistantEndpointPath());
+
+const buildAssistantApiUrl = () => {
+  const baseUrl = getAssistantApiBaseUrl().replace(/\/$/, '');
+  const endpointPath = getAssistantEndpointPath();
+  return baseUrl ? `${baseUrl}${endpointPath}` : endpointPath;
+};
+
+const buildAssistantLinks = (payload) => {
+  const links = [];
+  if (payload.focusSection && focusSectionLinks[payload.focusSection]) {
+    links.push(focusSectionLinks[payload.focusSection]);
+  }
+  if (payload.prefill?.service || payload.focusSection !== 'contacto') {
+    links.push({ label: 'Ir al contacto', href: '#contacto' });
   }
 
-  const matchingReply = assistantReplies.find((entry) => entry.test.test(normalizedInput));
-  if (matchingReply) {
-    return matchingReply;
+  return links.filter((link, index, collection) => collection.findIndex((entry) => entry.href === link.href) === index);
+};
+
+const setAssistantSubmittingState = (isSubmitting) => {
+  if (assistantInput) {
+    assistantInput.disabled = isSubmitting;
   }
 
-  return {
-    text: 'Puedo orientarte rápidamente sobre servicios, proyectos visibles, tiempos de trabajo, recursos y la mejor forma de iniciar una conversación.',
-    links: [
-      { label: 'Ver proyectos', href: '#proyectos' },
-      { label: 'Ir al contacto', href: '#contacto' }
-    ]
-  };
+  if (assistantSendButton) {
+    assistantSendButton.disabled = isSubmitting;
+    assistantSendButton.textContent = isSubmitting ? 'Pensando...' : 'Enviar';
+  }
+};
+
+const applyAssistantPrefill = (prefill, userPrompt) => {
+  if (!prefill) {
+    return;
+  }
+
+  const normalizedService = String(prefill.service || '').trim();
+  const draftMessage = String(prefill.message || '').trim();
+
+  if (serviceField && normalizedService && serviceLabels[normalizedService]) {
+    serviceField.value = normalizedService;
+    setFieldState(serviceField);
+  }
+
+  if (messageField && draftMessage) {
+    const shouldReplace = !messageField.value.trim() || messageField.dataset.assistantPrefill === 'true' || messageField.value.trim() === lastAssistantPrefill;
+    if (shouldReplace) {
+      messageField.value = draftMessage;
+      messageField.dataset.assistantPrefill = 'true';
+      lastAssistantPrefill = draftMessage;
+      updateCharacterCount();
+      setFieldState(messageField);
+    }
+  }
+
+  if (prefillNote && normalizedService && serviceLabels[normalizedService]) {
+    prefillNote.hidden = false;
+    prefillNote.textContent = `Formulario preparado para ${serviceLabels[normalizedService].toLowerCase()}. Puedes editarlo antes de enviarlo.`;
+  }
+
+  if (assistantConversation.length === 0 || assistantConversation[assistantConversation.length - 1]?.content !== userPrompt) {
+    assistantConversation.push({ role: 'user', content: userPrompt });
+  }
+
+  saveDraft();
+};
+
+const requestAssistantReply = async (prompt) => {
+  const response = await fetch(buildAssistantApiUrl(), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      message: prompt,
+      history: assistantConversation.slice(-6)
+    })
+  });
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.message || 'No fue posible responder la consulta en este momento.');
+  }
+
+  return data;
+};
+
+const handleAssistantPrompt = async (prompt) => {
+  if (!prompt) {
+    return;
+  }
+
+  appendAssistantMessage('user', prompt);
+  assistantConversation.push({ role: 'user', content: prompt });
+  setAssistantSubmittingState(true);
+  openAssistant();
+
+  try {
+    if (!canUseAssistantApi()) {
+      throw new Error('El asistente IA no esta disponible en este momento.');
+    }
+
+    const reply = await requestAssistantReply(prompt);
+    const links = buildAssistantLinks(reply);
+    appendAssistantMessage('bot', reply.answer || 'No pude generar una respuesta útil en este momento.', links);
+    assistantConversation.push({ role: 'assistant', content: reply.answer || '' });
+    applyAssistantPrefill(reply.prefill, prompt);
+  } catch (error) {
+    appendAssistantMessage('bot', error.message || 'No fue posible responder la consulta en este momento.', [{ label: 'Ir al contacto', href: '#contacto' }]);
+  } finally {
+    setAssistantSubmittingState(false);
+  }
 };
 
 const openAssistant = () => {
@@ -574,10 +651,7 @@ if (assistantToggle && assistantPanel) {
   assistantChips.forEach((chip) => {
     chip.addEventListener('click', () => {
       const prompt = chip.getAttribute('data-assistant-prompt') || '';
-      appendAssistantMessage('user', prompt);
-      const reply = getAssistantReply(prompt);
-      appendAssistantMessage('bot', reply.text, reply.links);
-      openAssistant();
+      handleAssistantPrompt(prompt);
     });
   });
 
@@ -588,9 +662,7 @@ if (assistantToggle && assistantPanel) {
       return;
     }
 
-    appendAssistantMessage('user', prompt);
-    const reply = getAssistantReply(prompt);
-    appendAssistantMessage('bot', reply.text, reply.links);
+    handleAssistantPrompt(prompt);
     assistantForm.reset();
   });
 
@@ -630,6 +702,9 @@ if (form) {
     field.addEventListener('input', () => {
       setFieldState(field);
       saveDraft();
+      if (field === messageField) {
+        field.dataset.assistantPrefill = 'false';
+      }
       if (field === messageField) {
         updateCharacterCount();
       }

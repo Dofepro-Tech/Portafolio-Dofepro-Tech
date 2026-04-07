@@ -27,8 +27,20 @@ module.exports = {
     from: process.env.CONTACT_FROM_EMAIL || '',
     resendApiKey: process.env.RESEND_API_KEY || ''
   },
+  assistant: {
+    apiKey: process.env.AI_API_KEY || process.env.OPENAI_API_KEY || '',
+    baseUrl: process.env.AI_BASE_URL || 'https://api.openai.com/v1',
+    model: process.env.AI_MODEL || 'gpt-4.1-mini',
+    maxTokens: toNumber(process.env.AI_MAX_TOKENS, 350),
+    temperature: Number.isFinite(Number(process.env.AI_TEMPERATURE)) ? Number(process.env.AI_TEMPERATURE) : 0.35,
+    timeoutMs: toNumber(process.env.AI_TIMEOUT_MS, 20000)
+  },
   rateLimit: {
     maxRequests: 5,
+    windowMs: 15 * 60 * 1000
+  },
+  assistantRateLimit: {
+    maxRequests: 12,
     windowMs: 15 * 60 * 1000
   }
 };

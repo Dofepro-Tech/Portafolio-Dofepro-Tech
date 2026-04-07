@@ -3,6 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const config = require('./config');
 const contactRouter = require('./routes/contact');
+const assistantRouter = require('./routes/assistant');
 const { createRateLimit } = require('./lib/rate-limit');
 
 const app = express();
@@ -32,11 +33,13 @@ app.get('/api/health', (_req, res) => {
   res.json({
     ok: true,
     service: 'portfolio-contact-backend',
-    mode: config.email.deliveryMode
+    mode: config.email.deliveryMode,
+    assistantConfigured: Boolean(config.assistant.apiKey)
   });
 });
 
 app.use('/api/contact', createRateLimit(config.rateLimit), contactRouter);
+app.use('/api/assistant', createRateLimit(config.assistantRateLimit), assistantRouter);
 
 app.use((_req, res) => {
   res.status(404).json({

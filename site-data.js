@@ -20,5 +20,10 @@ window.PORTFOLIO_CONFIG = {
     apiBaseUrl: 'https://portafolio-dofepro-tech-api.onrender.com',
     endpointPath: '/api/contact',
     allowLocalFallback: false
+  },
+  assistant: {
+    enabled: true,
+    apiBaseUrl: 'https://portafolio-dofepro-tech-api.onrender.com',
+    endpointPath: '/api/assistant'
   }
 };

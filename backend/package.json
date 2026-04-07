@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "check": "node --check src/server.js && node --check src/app.js && node --check src/config.js && node --check src/routes/contact.js && node --check src/lib/email-service.js && node --check src/lib/rate-limit.js && node --check src/lib/validate-contact.js"
+    "check": "node --check src/server.js && node --check src/app.js && node --check src/config.js && node --check src/routes/contact.js && node --check src/routes/assistant.js && node --check src/lib/email-service.js && node --check src/lib/rate-limit.js && node --check src/lib/validate-contact.js && node --check src/lib/validate-assistant.js && node --check src/lib/assistant-service.js"
   },
   "engines": {
     "node": ">=18"

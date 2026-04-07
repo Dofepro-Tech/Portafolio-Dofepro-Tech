@@ -1,5 +1,5 @@
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const allowedServices = new Set(['landing', 'sitio-web', 'redisenio', 'mantenimiento']);
+const allowedServices = new Set(['landing', 'sitio-web', 'auditoria', 'automatizacion', 'asesoria', 'redisenio', 'mantenimiento']);
 
 const normalizeText = (value) => (typeof value === 'string' ? value.trim() : '');
 
@@ -57,5 +57,6 @@ const validateContactPayload = (body) => {
 };
 
 module.exports = {
+  allowedServices,
   validateContactPayload
 };

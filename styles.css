@@ -1458,6 +1458,16 @@ body[data-theme="dark"] .assistant-message-user {
   letter-spacing: 0.05em;
 }
 
+.assistant-prefill-note {
+  margin: 0.9rem 0 0;
+  padding: 0.82rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+  color: var(--primary-strong);
+  font-weight: 700;
+}
+
 .floating-button {
   display: inline-flex;
   align-items: center;
