@@ -241,8 +241,8 @@ body.is-scrolled .site-header {
 .nav-link-icon {
   display: inline-grid;
   place-items: center;
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 1.92rem;
+  height: 1.92rem;
   line-height: 1;
 }
 
@@ -251,7 +251,7 @@ body.is-scrolled .site-header {
   height: 100%;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.8;
+  stroke-width: 1.9;
   stroke-linecap: round;
   stroke-linejoin: round;
 }

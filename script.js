@@ -494,6 +494,24 @@ const setAssistantSubmittingState = (isSubmitting) => {
   }
 };
 
+const getReadableAssistantError = (error, statusCode) => {
+  const rawMessage = String(error?.message || '').trim();
+
+  if (error?.name === 'AbortError') {
+    return 'El asistente tardó demasiado en responder. Intenta de nuevo en unos segundos o usa el formulario de contacto.';
+  }
+
+  if (/failed to fetch/i.test(rawMessage) || /networkerror/i.test(rawMessage) || /load failed/i.test(rawMessage)) {
+    return 'No pude conectarme con el asistente en este momento. Puedes intentarlo otra vez o seguir por el formulario de contacto.';
+  }
+
+  if (statusCode >= 500 || /error interno en la api/i.test(rawMessage)) {
+    return 'El asistente está temporalmente no disponible. Puedes intentarlo más tarde o seguir por el formulario.';
+  }
+
+  return rawMessage || 'No fue posible responder la consulta en este momento.';
+};
+
 const applyAssistantPrefill = (prefill, userPrompt) => {
   if (!prefill) {
     return;
@@ -531,23 +549,33 @@ const applyAssistantPrefill = (prefill, userPrompt) => {
 };
 
 const requestAssistantReply = async (prompt) => {
-  const response = await fetch(buildAssistantApiUrl(), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      message: prompt,
-      history: assistantConversation.slice(-6)
-    })
-  });
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), 18000);
 
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(data.message || 'No fue posible responder la consulta en este momento.');
+  try {
+    const response = await fetch(buildAssistantApiUrl(), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      signal: controller.signal,
+      body: JSON.stringify({
+        message: prompt,
+        history: assistantConversation.slice(-6)
+      })
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const error = new Error(data.message || 'No fue posible responder la consulta en este momento.');
+      error.statusCode = response.status;
+      throw error;
+    }
+
+    return data;
+  } finally {
+    window.clearTimeout(timeoutId);
   }
-
-  return data;
 };
 
 const handleAssistantPrompt = async (prompt) => {
@@ -571,7 +599,7 @@ const handleAssistantPrompt = async (prompt) => {
     assistantConversation.push({ role: 'assistant', content: reply.answer || '' });
     applyAssistantPrefill(reply.prefill, prompt);
   } catch (error) {
-    appendAssistantMessage('bot', error.message || 'No fue posible responder la consulta en este momento.', [{ label: 'Ir al contacto', href: '#contacto' }]);
+    appendAssistantMessage('bot', getReadableAssistantError(error, error?.statusCode), [{ label: 'Ir al contacto', href: '#contacto' }]);
   } finally {
     setAssistantSubmittingState(false);
   }
