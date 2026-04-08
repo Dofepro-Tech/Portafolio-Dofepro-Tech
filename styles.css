@@ -881,8 +881,12 @@ body[data-theme="dark"] .package-badge {
 }
 
 .page-search-hero {
-  max-width: min(34rem, 100%);
-  margin: 1.35rem 0 1.6rem auto;
+  justify-self: end;
+  width: min(36rem, calc(100% + 2.5rem));
+  max-width: min(36rem, calc(100vw - 3rem));
+  margin: 1.15rem 0 1.5rem;
+  transform: translateX(clamp(0rem, 4vw, 3rem));
+  z-index: 2;
 }
 
 .page-search::after {
@@ -2056,6 +2060,8 @@ body[data-theme="dark"] .floating-button:focus-visible {
   .page-search-hero {
     max-width: none;
     margin: 1.1rem 0 1.35rem;
+    width: 100%;
+    transform: none;
   }
 
   .page-search-form {
