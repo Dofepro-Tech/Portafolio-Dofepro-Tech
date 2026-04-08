@@ -72,6 +72,17 @@ body {
   max-width: 860px;
 }
 
+.legal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin: 1.4rem 0 2rem;
+}
+
+.legal-actions .button {
+  min-width: 12rem;
+}
+
 a {
   color: inherit;
 }

@@ -1,6 +1,5 @@
-# Portafolio-Dofepro-Tech
-# Reemplaza este contenido cuando tu proveedor de anuncios apruebe el sitio.
+# Dofepro-Tech
+# Este sitio no publica registros ads.txt activos todavia.
+# Cuando exista una cuenta de publicidad aprobada, este archivo se actualizara con el registro oficial del proveedor.
 # Ejemplo para Google AdSense:
 # google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
-
-# Mientras no exista un publisher ID real, manten este archivo sin datos activos.
