@@ -71,7 +71,14 @@
 
         <div class="header-actions">
           <nav class="page-inline-nav" aria-label="Accesos rapidos">
-            <a class="page-inline-nav-home" href="#inicio" aria-label="Inicio" title="Inicio"><span class="nav-link-icon" aria-hidden="true">⌂</span></a>
+            <a class="page-inline-nav-home" href="#inicio" aria-label="Inicio" title="Inicio">
+              <span class="nav-link-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                  <path d="M4.75 10.5 12 4.75l7.25 5.75"></path>
+                  <path d="M7.25 9.9V19a.75.75 0 0 0 .75.75h8a.75.75 0 0 0 .75-.75V9.9"></path>
+                </svg>
+              </span>
+            </a>
             <a href="#servicios">Servicios</a>
             <a href="#proposito">Mision y vision</a>
             <a href="#casos">Casos</a>
@@ -149,6 +156,42 @@
             </ul>
           </div>
 
+          <div class="hero-search-lane" data-reveal="left">
+            <div class="hero-search-group">
+              <p class="hero-signature" aria-label="Referencia inspiracional">Jehová Jireh <span>(Gen. 22:14)</span></p>
+
+              <div class="page-search page-search-hero">
+                <p class="page-search-kicker">Busqueda interna</p>
+
+                <form class="page-search-form" id="pageSearchForm" role="search" aria-label="Buscar dentro de la pagina">
+                  <label class="sr-only" for="pageSearchInput">Buscar dentro de la pagina</label>
+                  <div class="page-search-input-wrap">
+                    <span class="page-search-input-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                        <circle cx="10.5" cy="10.5" r="5.5"></circle>
+                        <path d="M15 15l4.5 4.5"></path>
+                      </svg>
+                    </span>
+                    <input
+                      id="pageSearchInput"
+                      type="search"
+                      name="page-search"
+                      inputmode="search"
+                      autocomplete="off"
+                      placeholder="Busca landing, automatizacion, recursos, casos o contacto"
+                    />
+                  </div>
+                  <button class="button button-primary" type="submit">Buscar</button>
+                </form>
+
+                <div class="page-search-feedback" aria-live="polite">
+                  <p class="page-search-status" id="pageSearchStatus">Prueba con: landing, conversion, automatizacion, scraping, recursos o contacto.</p>
+                  <div class="page-search-results" id="pageSearchResults" hidden></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <aside class="hero-card" aria-label="Resumen profesional" data-reveal="left">
             <div class="hero-card-badge">Disponible para nuevos proyectos</div>
             <h2>Estructura, diseño y backend listos para crecer sin rehacer todo.</h2>
@@ -201,42 +244,6 @@
               </div>
             </section>
           </aside>
-
-          <div class="hero-search-lane" data-reveal="up">
-            <div class="hero-search-group">
-              <p class="hero-signature" aria-label="Referencia inspiracional">Jehová Jireh <span>(Gen. 22:14)</span></p>
-
-              <div class="page-search page-search-hero">
-                <p class="page-search-kicker">Busqueda interna</p>
-
-                <form class="page-search-form" id="pageSearchForm" role="search" aria-label="Buscar dentro de la pagina">
-                  <label class="sr-only" for="pageSearchInput">Buscar dentro de la pagina</label>
-                  <div class="page-search-input-wrap">
-                    <span class="page-search-input-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-                        <circle cx="10.5" cy="10.5" r="5.5"></circle>
-                        <path d="M15 15l4.5 4.5"></path>
-                      </svg>
-                    </span>
-                    <input
-                      id="pageSearchInput"
-                      type="search"
-                      name="page-search"
-                      inputmode="search"
-                      autocomplete="off"
-                      placeholder="Busca landing, automatizacion, recursos, casos o contacto"
-                    />
-                  </div>
-                  <button class="button button-primary" type="submit">Buscar</button>
-                </form>
-
-                <div class="page-search-feedback" aria-live="polite">
-                  <p class="page-search-status" id="pageSearchStatus">Prueba con: landing, conversion, automatizacion, scraping, recursos o contacto.</p>
-                  <div class="page-search-results" id="pageSearchResults" hidden></div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

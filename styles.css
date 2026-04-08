@@ -234,17 +234,26 @@ body.is-scrolled .site-header {
 }
 
 .page-inline-nav-home {
-  min-width: 4.1rem;
-  padding-inline: 0.88rem;
+  min-width: 3.7rem;
+  padding-inline: 0.72rem;
 }
 
 .nav-link-icon {
   display: inline-grid;
   place-items: center;
-  width: 2.3rem;
-  height: 2.3rem;
-  font-size: 2.15rem;
+  width: 1.7rem;
+  height: 1.7rem;
   line-height: 1;
+}
+
+.nav-link-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .header-link-button {
@@ -489,10 +498,14 @@ body[data-theme="dark"] .theme-icon-moon {
 
 .hero-grid {
   grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+  grid-template-areas:
+    "copy search"
+    "copy card";
   align-items: start;
 }
 
 .hero-copy {
+  grid-area: copy;
   align-self: start;
 }
 
@@ -696,8 +709,7 @@ body[data-theme="dark"] .button-primary {
 
 .hero-card {
   position: relative;
-  grid-column: 2;
-  grid-row: 1 / span 2;
+  grid-area: card;
   align-self: start;
   padding: 1.6rem;
   border-radius: var(--radius-lg);
@@ -888,12 +900,12 @@ body[data-theme="dark"] .package-badge {
 }
 
 .hero-search-lane {
-  grid-column: 1;
-  grid-row: 2;
-  justify-self: end;
+  grid-area: search;
+  justify-self: stretch;
   align-self: start;
-  width: min(39rem, calc(100% + 3.2rem));
-  margin-top: -1.2rem;
+  width: 100%;
+  max-width: 39rem;
+  margin-top: 0.15rem;
   z-index: 3;
 }
 
@@ -2007,6 +2019,13 @@ body[data-theme="dark"] .floating-button:focus-visible {
 
   .hero-special-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-grid {
+    grid-template-areas:
+      "copy"
+      "search"
+      "card";
   }
 
   .hero-card,
