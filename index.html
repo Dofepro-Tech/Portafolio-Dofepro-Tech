@@ -955,7 +955,9 @@
     <div class="floating-actions" aria-label="Acciones rápidas">
       <div class="assistant-shell" id="assistantShell">
         <div class="assistant-toggle-hint" id="assistantToggleHint" hidden>
-          ¿Tienes dudas? Pregunta a Dofe.
+          <span class="assistant-toggle-hint-badge">Asistente</span>
+          <strong>Hazme una pregunta</strong>
+          <span>Preguntale a Dofe y te oriento rapido.</span>
         </div>
 
         <section class="assistant-panel" id="assistantPanel" aria-label="Asistente IA" hidden>
@@ -990,7 +992,16 @@
         </section>
 
         <button class="floating-button assistant-toggle is-visible" id="assistantToggle" type="button" aria-expanded="false" aria-controls="assistantPanel" aria-label="Abrir Preguntale a Dofe" title="Preguntale a Dofe">
-          <span class="assistant-toggle-label">Preguntale a Dofe</span>
+          <span class="assistant-toggle-inner">
+            <span class="assistant-toggle-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                <path class="assistant-star assistant-star-soft" d="M8.3 4.2 9.6 7.4l3.2 1.3-3.2 1.3-1.3 3.2-1.3-3.2-3.2-1.3 3.2-1.3 1.3-3.2Z" />
+                <path class="assistant-star assistant-star-cool" d="M16.9 7.8 17.7 9.8l2 0.8-2 0.8-0.8 2-0.8-2-2-0.8 2-0.8 0.8-2Z" />
+                <path class="assistant-star assistant-star-warm" d="M15 13.8 16 16.4l2.6 1-2.6 1-1 2.6-1-2.6-2.6-1 2.6-1 1-2.6Z" />
+              </svg>
+            </span>
+            <span class="assistant-toggle-label">Preguntale a Dofe</span>
+          </span>
         </button>
       </div>
 

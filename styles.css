@@ -1749,27 +1749,57 @@ body[data-theme="dark"] .quote-card::before {
 
 .assistant-shell {
   position: relative;
-  max-width: min(14rem, calc(100vw - 1.5rem));
+  width: min(13.15rem, calc(100vw - 2.5rem));
+  max-width: calc(100vw - 2.5rem);
 }
 
 .assistant-toggle-hint {
   position: absolute;
   right: 0;
   bottom: calc(100% + 0.85rem);
-    max-width: min(14.5rem, calc(100vw - 2rem));
-  padding: 0.8rem 0.95rem;
-  border: 1px solid var(--border-strong);
+  display: grid;
+  gap: 0.18rem;
+  max-width: min(15.2rem, calc(100vw - 2rem));
+  padding: 0.82rem 0.98rem;
+  border: 1px solid rgba(115, 198, 255, 0.34);
   border-radius: 18px;
-  background: color-mix(in srgb, var(--surface-strong) 92%, transparent);
-  color: var(--text);
-  box-shadow: var(--shadow-soft);
-  font-size: 0.9rem;
+  background: linear-gradient(135deg, rgba(10, 23, 46, 0.96), rgba(16, 40, 72, 0.94));
+  color: #eef6ff;
+  box-shadow: 0 18px 34px rgba(8, 22, 48, 0.28), 0 0 0 1px rgba(73, 196, 255, 0.08);
+  font-size: 0.88rem;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.3;
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
   transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.assistant-toggle-hint strong {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.assistant-toggle-hint span:last-child {
+  color: rgba(229, 241, 255, 0.86);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.assistant-toggle-hint-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  padding: 0.28rem 0.5rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(32, 232, 213, 0.22), rgba(91, 124, 255, 0.22));
+  color: #96f8ee;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .assistant-toggle-hint::after {
@@ -1779,15 +1809,16 @@ body[data-theme="dark"] .quote-card::before {
   top: calc(100% - 0.2rem);
   width: 0.95rem;
   height: 0.95rem;
-  border-right: 1px solid var(--border-strong);
-  border-bottom: 1px solid var(--border-strong);
-  background: color-mix(in srgb, var(--surface-strong) 92%, transparent);
+  border-right: 1px solid rgba(115, 198, 255, 0.34);
+  border-bottom: 1px solid rgba(115, 198, 255, 0.34);
+  background: rgba(14, 34, 61, 0.98);
   transform: rotate(45deg);
 }
 
 .assistant-shell.has-nudge .assistant-toggle-hint {
   opacity: 1;
   transform: translateY(0);
+  animation: assistantHintPop 1.1s cubic-bezier(0.22, 1, 0.36, 1) 3;
 }
 
 .assistant-panel {
@@ -1949,99 +1980,266 @@ body[data-theme="dark"] .assistant-message-user {
   font-weight: 800;
 }
 
-.assistant-toggle {
+.floating-button.assistant-toggle {
   position: relative;
-  width: auto;
-  min-width: 12.25rem;
-  max-width: min(13.5rem, calc(100vw - 1.5rem));
-  min-height: 3.35rem;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: auto;
+  min-height: 3.45rem;
   justify-content: center;
-  padding: 0.82rem 1.15rem;
+  padding: 0.2rem;
   gap: 0;
   overflow: hidden;
   isolation: isolate;
-  border-width: 1.5px;
+  border: 0;
   border-radius: 999px;
-  border-color: rgba(137, 208, 255, 0.22);
-  background: linear-gradient(135deg, #0f3f5f 0%, #145a81 56%, #0d4b70 100%);
-  box-shadow: 0 14px 28px rgba(10, 24, 53, 0.2);
+  background: linear-gradient(90deg, #20e8d5 0%, #2fa8ff 34%, #4b6dff 63%, #d84ad8 100%);
+  box-shadow: 0 14px 30px rgba(10, 24, 53, 0.22), 0 3px 10px rgba(216, 74, 216, 0.18);
   font-weight: 900;
   line-height: 1;
+  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease, filter 220ms ease;
 }
 
-.assistant-toggle::before {
+.floating-button.assistant-toggle::before {
   content: "";
   position: absolute;
-  inset: 2px;
+  inset: 0;
   border-radius: inherit;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.03));
+  z-index: 0;
+  opacity: 0.78;
+}
+
+.floating-button.assistant-toggle::after {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 0.16rem;
+  height: 32%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
   z-index: 0;
 }
 
-.assistant-toggle::after {
+.assistant-toggle-inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.62rem;
+  width: 100%;
+  min-height: 3.02rem;
+  padding: 0.54rem 0.64rem;
+  border-radius: inherit;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8fb 100%);
+  color: #7a7f88;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.98), inset 0 -1px 0 rgba(193, 201, 214, 0.5), 0 1px 0 rgba(255, 255, 255, 0.55);
+  animation: assistantToggleBreath 4.8s ease-in-out infinite;
+  transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+
+.assistant-toggle-inner::after {
   content: "";
   position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 0.28rem;
-  height: 38%;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-  z-index: 0;
+  top: -28%;
+  bottom: -28%;
+  left: -42%;
+  width: 26%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0));
+  transform: skewX(-24deg);
+  opacity: 0;
+  animation: assistantMirrorSweep 7.2s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .floating-button.assistant-toggle:hover,
 .floating-button.assistant-toggle:focus-visible {
-  background: linear-gradient(135deg, #14557b 0%, #1c709a 56%, #12597f 100%);
-  border-color: rgba(156, 221, 255, 0.34);
-  color: #ffffff;
-  box-shadow: 0 18px 32px rgba(10, 24, 53, 0.24);
+  background: linear-gradient(90deg, #30ecd8 0%, #40b1ff 34%, #5b7cff 63%, #e85cdc 100%);
+  color: inherit;
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 20px 38px rgba(10, 24, 53, 0.28), 0 5px 14px rgba(216, 74, 216, 0.24);
+  filter: saturate(1.08);
 }
 
 body[data-theme="dark"] .floating-button.assistant-toggle:hover,
 body[data-theme="dark"] .floating-button.assistant-toggle:focus-visible {
-  background: linear-gradient(135deg, #14557b 0%, #1c709a 56%, #12597f 100%);
-  border-color: rgba(156, 221, 255, 0.3);
-  color: #ffffff;
-  box-shadow: 0 18px 32px rgba(10, 24, 53, 0.28);
+  background: linear-gradient(90deg, #30ecd8 0%, #40b1ff 34%, #5b7cff 63%, #e85cdc 100%);
+  color: inherit;
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 20px 40px rgba(10, 24, 53, 0.32), 0 5px 14px rgba(216, 74, 216, 0.26);
+  filter: saturate(1.08);
+}
+
+.floating-button.assistant-toggle:hover .assistant-toggle-inner,
+.floating-button.assistant-toggle:focus-visible .assistant-toggle-inner {
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -1px 0 rgba(193, 201, 214, 0.46), 0 4px 14px rgba(64, 177, 255, 0.12);
+}
+
+.floating-button.assistant-toggle:hover .assistant-toggle-inner::after,
+.floating-button.assistant-toggle:focus-visible .assistant-toggle-inner::after {
+  animation-duration: 2.2s;
+}
+
+.floating-button.assistant-toggle:hover .assistant-toggle-icon,
+.floating-button.assistant-toggle:focus-visible .assistant-toggle-icon {
+  transform: scale(1.08) rotate(5deg);
+  color: #757a85;
+}
+
+.assistant-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.72rem;
+  height: 1.72rem;
+  flex: 0 0 auto;
+  color: #8a8d93;
+  animation: assistantSparkleTwinkle 3.4s ease-in-out infinite;
+  transition: transform 220ms ease, color 220ms ease;
+}
+
+.assistant-toggle-icon svg {
+  width: 1.56rem;
+  height: 1.56rem;
+  overflow: visible;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.32));
+}
+
+.assistant-star {
+  stroke: rgba(113, 118, 132, 0.18);
+  stroke-width: 0.25;
+}
+
+.assistant-star-soft {
+  fill: #9a8cff;
+}
+
+.assistant-star-cool {
+  fill: #49cfff;
+}
+
+.assistant-star-warm {
+  fill: #ffd470;
 }
 
 .assistant-toggle-label {
   display: block;
-  position: relative;
-  z-index: 1;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.015em;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0;
   line-height: 1.1;
   text-align: center;
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(8, 24, 38, 0.24);
+  color: #878b93;
+  text-shadow: none;
 }
 
 .assistant-shell.has-nudge .assistant-toggle {
-  animation: assistantTogglePulse 1.1s ease 3;
+  animation: assistantTogglePulse 1.45s cubic-bezier(0.22, 1, 0.36, 1) 4;
+}
+
+.assistant-shell.has-nudge .assistant-toggle-inner::after {
+  animation-duration: 1.8s;
+  animation-iteration-count: 3;
+}
+
+.assistant-shell.has-nudge .assistant-toggle-icon {
+  animation-duration: 1.15s;
+}
+
+@keyframes assistantToggleBreath {
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.98), inset 0 -1px 0 rgba(193, 201, 214, 0.5), 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+
+  50% {
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.98), inset 0 -1px 0 rgba(193, 201, 214, 0.5), 0 3px 10px rgba(63, 118, 255, 0.08);
+  }
+}
+
+@keyframes assistantSparkleTwinkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.88;
+  }
+
+  50% {
+    transform: scale(1.06) rotate(6deg);
+    opacity: 1;
+  }
+}
+
+@keyframes assistantHintPop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  35% {
+    transform: translateY(-6px) scale(1.03);
+  }
+
+  65% {
+    transform: translateY(0) scale(0.99);
+  }
+}
+
+@keyframes assistantMirrorSweep {
+  0%,
+  100% {
+    left: -42%;
+    opacity: 0;
+  }
+
+  14% {
+    opacity: 0;
+  }
+
+  28% {
+    left: 112%;
+    opacity: 0.46;
+  }
+
+  29%,
+  99% {
+    opacity: 0;
+  }
 }
 
 @keyframes assistantTogglePulse {
   0%,
   100% {
     transform: translateY(0) scale(1);
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 14px 30px rgba(10, 24, 53, 0.22), 0 3px 10px rgba(216, 74, 216, 0.18);
   }
 
-  40% {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 24px 36px rgba(255, 95, 127, 0.28);
+  24% {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 0 0 8px rgba(48, 236, 216, 0.12), 0 20px 34px rgba(10, 24, 53, 0.24), 0 6px 16px rgba(216, 74, 216, 0.2);
   }
 
-  70% {
+  48% {
+    transform: translateY(-1px) scale(1.065);
+    box-shadow: 0 0 0 14px rgba(91, 124, 255, 0.09), 0 24px 40px rgba(10, 24, 53, 0.28), 0 8px 18px rgba(216, 74, 216, 0.24);
+  }
+
+  72% {
     transform: translateY(0) scale(0.985);
+    box-shadow: 0 0 0 5px rgba(232, 92, 220, 0.08), 0 16px 28px rgba(10, 24, 53, 0.2);
   }
 }
 
@@ -2071,6 +2269,10 @@ body[data-theme="dark"] .floating-button.assistant-toggle:focus-visible {
   pointer-events: none;
   transform: translateY(10px);
   transition: opacity 180ms ease, transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+body.nav-open .floating-actions {
+  z-index: 150;
 }
 
 .floating-button.is-visible {
@@ -2266,23 +2468,41 @@ body[data-theme="dark"] .floating-button:focus-visible {
 
   .assistant-shell {
     order: 1;
-    max-width: min(13.25rem, calc(100vw - 1.5rem));
+    width: min(12.25rem, calc(100vw - 2rem));
+    max-width: calc(100vw - 2rem);
   }
 
   #scrollTopButton {
     order: 2;
   }
 
-  .assistant-toggle {
-    width: auto;
-    min-width: 11.9rem;
-    max-width: min(13rem, calc(100vw - 1.5rem));
+  .floating-button.assistant-toggle {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    height: auto;
     min-height: 3.1rem;
-    padding: 0.74rem 1rem;
+    padding: 0.18rem;
+  }
+
+  .assistant-toggle-inner {
+    min-height: 2.74rem;
+    gap: 0.52rem;
+    padding: 0.46rem 0.58rem;
+  }
+
+  .assistant-toggle-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .assistant-toggle-icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   .assistant-toggle-label {
-    font-size: 0.88rem;
+    font-size: 0.76rem;
   }
 
   .assistant-toggle-hint {

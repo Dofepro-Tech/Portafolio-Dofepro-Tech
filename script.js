@@ -778,6 +778,7 @@ const toggleNav = () => {
   navToggle.setAttribute('aria-expanded', String(!isExpanded));
   siteNav.classList.toggle('is-open', !isExpanded);
   navToggle.classList.toggle('is-active', !isExpanded);
+  document.body.classList.toggle('nav-open', !isExpanded);
 };
 
 const closeNav = () => {
@@ -788,6 +789,7 @@ const closeNav = () => {
   navToggle.setAttribute('aria-expanded', 'false');
   siteNav.classList.remove('is-open');
   navToggle.classList.remove('is-active');
+  document.body.classList.remove('nav-open');
 };
 
 const shouldIgnoreNavClose = (target) => {
