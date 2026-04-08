@@ -881,7 +881,8 @@ body[data-theme="dark"] .package-badge {
 }
 
 .page-search-hero {
-  margin: 1.35rem 0 1.6rem;
+  max-width: min(34rem, 100%);
+  margin: 1.35rem 0 1.6rem auto;
 }
 
 .page-search::after {
@@ -2053,6 +2054,7 @@ body[data-theme="dark"] .floating-button:focus-visible {
   }
 
   .page-search-hero {
+    max-width: none;
     margin: 1.1rem 0 1.35rem;
   }
 

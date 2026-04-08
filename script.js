@@ -96,7 +96,8 @@ const assistantConversation = [];
 const contactPrefillQueryKeys = {
   service: 'contactService',
   message: 'contactMessage',
-  cta: 'contactCta'
+  cta: 'contactCta',
+  focus: 'contactFocus'
 };
 let lastAssistantPrefill = '';
 let lastContactShortcutPrefill = '';
@@ -271,6 +272,18 @@ const scrollToContactForm = () => {
   window.setTimeout(() => highlightTarget.classList.remove('search-target-flash'), 1800);
 };
 
+const focusContactMessageField = () => {
+  if (!messageField) {
+    return;
+  }
+
+  window.setTimeout(() => {
+    messageField.focus({ preventScroll: true });
+    const textLength = messageField.value.length;
+    messageField.setSelectionRange(textLength, textLength);
+  }, 420);
+};
+
 const getContactShortcutPayload = (source) => ({
   service: String(source?.getAttribute?.('data-contact-service') || '').trim(),
   message: String(source?.getAttribute?.('data-contact-message') || '').trim(),
@@ -290,6 +303,7 @@ const buildContactNavigationUrl = (link, payload) => {
   if (payload.ctaLabel) {
     targetUrl.searchParams.set(contactPrefillQueryKeys.cta, payload.ctaLabel);
   }
+  targetUrl.searchParams.set(contactPrefillQueryKeys.focus, 'message');
 
   if (!targetUrl.hash) {
     targetUrl.hash = '#contacto';
@@ -303,12 +317,13 @@ const readContactPrefillFromUrl = () => {
   const service = String(params.get(contactPrefillQueryKeys.service) || '').trim();
   const message = String(params.get(contactPrefillQueryKeys.message) || '').trim();
   const ctaLabel = String(params.get(contactPrefillQueryKeys.cta) || '').trim();
+  const focus = String(params.get(contactPrefillQueryKeys.focus) || '').trim();
 
   if (!service && !message) {
     return null;
   }
 
-  return { service, message, ctaLabel };
+  return { service, message, ctaLabel, focus };
 };
 
 const clearContactPrefillFromUrl = () => {
@@ -320,6 +335,7 @@ const clearContactPrefillFromUrl = () => {
   currentUrl.searchParams.delete(contactPrefillQueryKeys.service);
   currentUrl.searchParams.delete(contactPrefillQueryKeys.message);
   currentUrl.searchParams.delete(contactPrefillQueryKeys.cta);
+  currentUrl.searchParams.delete(contactPrefillQueryKeys.focus);
   const normalizedSearch = currentUrl.searchParams.toString();
   const cleanUrl = `${currentUrl.pathname}${normalizedSearch ? `?${normalizedSearch}` : ''}${currentUrl.hash}`;
   window.history.replaceState({}, document.title, cleanUrl);
@@ -927,6 +943,7 @@ if (contactShortcutLinks.length) {
         event.preventDefault();
         applyContactShortcutPrefill(payload, { forceMessage: true });
         scrollToContactForm();
+        focusContactMessageField();
         return;
       }
 
@@ -990,6 +1007,9 @@ if (form) {
   const contactPrefillFromUrl = readContactPrefillFromUrl();
   if (contactPrefillFromUrl) {
     applyContactShortcutPrefill(contactPrefillFromUrl, { forceMessage: true });
+    if (contactPrefillFromUrl.focus === 'message') {
+      focusContactMessageField();
+    }
     clearContactPrefillFromUrl();
   }
   updateCharacterCount();
