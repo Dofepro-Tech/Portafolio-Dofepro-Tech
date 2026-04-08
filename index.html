@@ -954,10 +954,14 @@
 
     <div class="floating-actions" aria-label="Acciones rápidas">
       <div class="assistant-shell" id="assistantShell">
+        <div class="assistant-toggle-hint" id="assistantToggleHint" hidden>
+          ¿Tienes dudas? Pregunta a Dofe.
+        </div>
+
         <section class="assistant-panel" id="assistantPanel" aria-label="Asistente IA" hidden>
           <div class="assistant-header">
             <div>
-              <p class="assistant-eyebrow">Asistente IA</p>
+              <p class="assistant-eyebrow">Preguntar a Dofe</p>
               <h2>Respuestas rápidas para orientarte mejor</h2>
             </div>
             <button class="assistant-close" id="assistantClose" type="button" aria-label="Cerrar asistente">×</button>
@@ -966,7 +970,7 @@
           <div class="assistant-messages" id="assistantMessages" aria-live="polite" aria-atomic="false">
             <article class="assistant-message assistant-message-bot">
               <p>
-                Puedes preguntarme por servicios, tiempos, proyectos públicos, recursos o por la mejor forma de iniciar tu consulta.
+                Soy Dofe. Puedes preguntarme por servicios, tiempos, proyectos públicos, recursos o por la mejor forma de iniciar tu consulta.
               </p>
             </article>
           </div>
@@ -979,27 +983,21 @@
           </div>
 
           <form class="assistant-form" id="assistantForm">
-            <label class="sr-only" for="assistantInput">Escribe una pregunta al asistente</label>
-            <input id="assistantInput" name="assistantInput" type="text" maxlength="180" placeholder="Escribe tu pregunta" autocomplete="off" />
+            <label class="sr-only" for="assistantInput">Escribe una pregunta a Dofe</label>
+            <input id="assistantInput" name="assistantInput" type="text" maxlength="180" placeholder="Escribe tu pregunta a Dofe" autocomplete="off" />
             <button class="assistant-send" type="submit">Enviar</button>
           </form>
         </section>
 
-        <button class="floating-button assistant-toggle is-visible" id="assistantToggle" type="button" aria-expanded="false" aria-controls="assistantPanel" aria-label="Abrir bot IA" title="Bot IA">
+        <button class="floating-button assistant-toggle is-visible" id="assistantToggle" type="button" aria-expanded="false" aria-controls="assistantPanel" aria-label="Abrir Preguntar a Dofe" title="Preguntar a Dofe">
           <span class="assistant-toggle-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" role="presentation" focusable="false">
-              <circle class="robot-antenna-dot" cx="16" cy="4.4" r="1.8" />
-              <path class="robot-antenna-line" d="M16 6.6v2.7" />
-              <rect class="robot-head" x="8.2" y="9.1" width="15.6" height="13.5" rx="6.1" />
-              <circle class="robot-ear" cx="6.2" cy="15.9" r="2.2" />
-              <circle class="robot-ear" cx="25.8" cy="15.9" r="2.2" />
-              <circle class="robot-eye" cx="13" cy="15.1" r="1.45" />
-              <circle class="robot-eye" cx="19" cy="15.1" r="1.45" />
-              <path class="robot-mouth" d="M13.2 18.9c0.7 0.8 1.7 1.2 2.8 1.2s2.1-0.4 2.8-1.2" />
-              <path class="robot-neck" d="M13.9 22.6v2M18.1 22.6v2" />
-              <path class="robot-base" d="M11.7 25.5h8.6" />
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <path d="M12 2.8 13.7 7 18 8.7l-4.3 1.7-1.7 4.3-1.7-4.3L6 8.7 10.3 7 12 2.8Z" />
+              <path d="M18.3 13.1 19.1 15.2 21.2 16l-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8.8-2.1Z" />
+              <circle cx="6.4" cy="16.6" r="1.2" />
             </svg>
           </span>
+          <span class="assistant-toggle-label">Preguntar a Dofe</span>
         </button>
       </div>
 

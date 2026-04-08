@@ -73,6 +73,7 @@ const scrollProgressBar = document.querySelector('#scrollProgressBar');
 const assistantShell = document.querySelector('#assistantShell');
 const assistantPanel = document.querySelector('#assistantPanel');
 const assistantToggle = document.querySelector('#assistantToggle');
+const assistantToggleHint = document.querySelector('#assistantToggleHint');
 const assistantClose = document.querySelector('#assistantClose');
 const assistantForm = document.querySelector('#assistantForm');
 const assistantInput = document.querySelector('#assistantInput');
@@ -101,6 +102,9 @@ const contactPrefillQueryKeys = {
 };
 let lastAssistantPrefill = '';
 let lastContactShortcutPrefill = '';
+let assistantNudgeTimer = null;
+let assistantNudgeShown = false;
+let assistantInteracted = false;
 
 const setTextContent = (selector, value) => {
   document.querySelectorAll(selector).forEach((element) => {
@@ -610,6 +614,16 @@ const openAssistant = () => {
     return;
   }
 
+  assistantInteracted = true;
+  if (assistantNudgeTimer) {
+    window.clearTimeout(assistantNudgeTimer);
+    assistantNudgeTimer = null;
+  }
+  assistantShell.classList.remove('has-nudge');
+  if (assistantToggleHint) {
+    assistantToggleHint.hidden = true;
+  }
+
   assistantShell.classList.add('is-open');
   assistantPanel.hidden = false;
   assistantToggle.setAttribute('aria-expanded', 'true');
@@ -635,6 +649,49 @@ const toggleAssistant = () => {
   } else {
     openAssistant();
   }
+};
+
+const hideAssistantNudge = () => {
+  if (assistantNudgeTimer) {
+    window.clearTimeout(assistantNudgeTimer);
+    assistantNudgeTimer = null;
+  }
+
+  assistantShell?.classList.remove('has-nudge');
+  if (assistantToggleHint) {
+    assistantToggleHint.hidden = true;
+  }
+};
+
+const showAssistantNudge = () => {
+  if (!assistantShell || !assistantToggle || assistantInteracted || assistantNudgeShown || document.hidden || assistantShell.classList.contains('is-open')) {
+    return;
+  }
+
+  assistantNudgeShown = true;
+  if (assistantToggleHint) {
+    assistantToggleHint.hidden = false;
+  }
+  assistantShell.classList.add('has-nudge');
+
+  window.setTimeout(() => {
+    assistantShell.classList.remove('has-nudge');
+    if (assistantToggleHint) {
+      assistantToggleHint.hidden = true;
+    }
+  }, 5200);
+};
+
+const scheduleAssistantNudge = () => {
+  if (!assistantShell || !assistantToggle || assistantInteracted || assistantNudgeShown) {
+    return;
+  }
+
+  if (assistantNudgeTimer) {
+    window.clearTimeout(assistantNudgeTimer);
+  }
+
+  assistantNudgeTimer = window.setTimeout(showAssistantNudge, 18000);
 };
 
 const hydrateSiteConfig = () => {
@@ -983,6 +1040,7 @@ if (contactShortcutLinks.length) {
 if (assistantToggle && assistantPanel) {
   assistantToggle.addEventListener('click', toggleAssistant);
   assistantClose?.addEventListener('click', closeAssistant);
+  assistantToggle.addEventListener('pointerenter', hideAssistantNudge);
 
   assistantChips.forEach((chip) => {
     chip.addEventListener('click', () => {
@@ -1018,6 +1076,17 @@ if (assistantToggle && assistantPanel) {
       closeAssistant();
     }
   });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      hideAssistantNudge();
+      return;
+    }
+
+    scheduleAssistantNudge();
+  });
+
+  scheduleAssistantNudge();
 }
 
 if (scrollTopButton) {
