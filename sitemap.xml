@@ -13,6 +13,12 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/terminos-condiciones.html</loc>
+      <lastmod>2026-04-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/guia-landing-negocio.html</loc>
       <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
@@ -26,6 +32,24 @@
   </url>
   <url>
     <loc>https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/elegir-hosting-stack.html</loc>
+      <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/auditoria-web-conversion.html</loc>
+      <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/landing-captacion-clientes.html</loc>
+      <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/soporte-optimizacion-web.html</loc>
       <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
