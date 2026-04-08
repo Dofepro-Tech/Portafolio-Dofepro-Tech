@@ -489,7 +489,11 @@ body[data-theme="dark"] .theme-icon-moon {
 
 .hero-grid {
   grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
-  align-items: center;
+  align-items: start;
+}
+
+.hero-copy {
+  align-self: start;
 }
 
 .eyebrow {
@@ -692,6 +696,9 @@ body[data-theme="dark"] .button-primary {
 
 .hero-card {
   position: relative;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
   padding: 1.6rem;
   border-radius: var(--radius-lg);
 }
@@ -880,13 +887,26 @@ body[data-theme="dark"] .package-badge {
   overflow: hidden;
 }
 
-.page-search-hero {
+.hero-search-lane {
+  grid-column: 1;
+  grid-row: 2;
   justify-self: end;
-  width: min(36rem, calc(100% + 2.5rem));
-  max-width: min(36rem, calc(100vw - 3rem));
-  margin: 1.15rem 0 1.5rem;
-  transform: translateX(clamp(0rem, 4vw, 3rem));
-  z-index: 2;
+  align-self: start;
+  width: min(39rem, calc(100% + 3.2rem));
+  margin-top: -1.2rem;
+  z-index: 3;
+}
+
+.hero-search-group {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.page-search-hero {
+  width: 100%;
+  margin: 0;
+  transform: none;
+  max-width: none;
 }
 
 .page-search::after {
@@ -1989,6 +2009,18 @@ body[data-theme="dark"] .floating-button:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .hero-card,
+  .hero-search-lane {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .hero-search-lane {
+    justify-self: stretch;
+    width: 100%;
+    margin-top: 0;
+  }
+
   .page-search-form {
     grid-template-columns: 1fr;
   }
@@ -2058,10 +2090,7 @@ body[data-theme="dark"] .floating-button:focus-visible {
   }
 
   .page-search-hero {
-    max-width: none;
     margin: 1.1rem 0 1.35rem;
-    width: 100%;
-    transform: none;
   }
 
   .page-search-form {
