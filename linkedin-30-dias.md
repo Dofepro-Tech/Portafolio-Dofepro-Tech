@@ -20,7 +20,28 @@ Idea:
 "Lance una nueva version de mi sitio/portafolio para presentar mejor servicios, recursos y soluciones digitales orientadas a negocios. La idea no fue solo que se vea bien, sino que convierta mejor y sirva como base real para crecer."
 
 CTA:
-Ver sitio: https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/
+Ver sitio: <https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/>
+
+Texto listo para publicar:
+
+Hoy lancé una nueva versión de mi sitio: Dofepro-Tech.
+
+No quise hacer solo una página bonita.
+Quise construir una base real para presentar servicios, compartir recursos útiles y convertir mejor cuando alguien necesite una landing, una mejora web o una solución digital más clara.
+
+El enfoque fue simple:
+
+- mejor presentación,
+- más claridad comercial,
+- estructura lista para crecer,
+- y una base técnica que no obligue a rehacer todo después.
+
+Todavía seguiré afinando detalles, pero la base ya está publicada.
+
+Si quieres verla, aquí está:
+<https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/>
+
+Si tienes un negocio y quieres algo parecido, puedes escribirme.
 
 ### Dia 3
 
@@ -29,12 +50,51 @@ Post: por que una landing no debe ser solo bonita
 CTA:
 llevar a la home o a la seccion de servicios.
 
+Texto listo para publicar:
+
+Una landing no debería diseñarse solo para verse bonita.
+
+Si no comunica bien, no genera confianza y no guía a una acción clara, termina siendo solo una pieza decorativa.
+
+Una buena landing debería hacer al menos estas 4 cosas:
+
+- explicar rápido qué ofreces,
+- dejar claro para quién es,
+- responder objeciones básicas,
+- y facilitar el contacto sin fricción.
+
+Muchas veces el problema no es el diseño en sí, sino la falta de estructura comercial.
+
+Por eso cuando trabajo una página no pienso solo en colores o bloques, sino en claridad, confianza y conversión.
+
+Si quieres ver el enfoque que estoy aplicando en mi sitio, te lo dejo aquí:
+<https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/>
+
 ### Dia 5
 
 Post: checklist de publicacion web
 
 CTA:
-https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/checklist-publicacion-web.html
+<https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/checklist-publicacion-web.html>
+
+Texto listo para publicar:
+
+Publicar una web no es solo subir archivos.
+
+Antes de compartir un sitio conviene revisar al menos esto:
+
+- que el formulario funcione de extremo a extremo,
+- que el backend responda bien,
+- que el correo llegue,
+- que robots y sitemap estén correctos,
+- y que la experiencia final inspire confianza.
+
+Preparé una checklist clara con lo mínimo que revisaría antes de dar por publicado un sitio con formulario y backend.
+
+La dejo aquí:
+<https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/checklist-publicacion-web.html>
+
+Si estás por publicar una web, probablemente te ahorre varios errores.
 
 ## Semana 2
 
@@ -43,7 +103,7 @@ https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/checklist-publicacion-web
 Post: como saber si un negocio necesita una landing page
 
 CTA:
-https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/guia-landing-negocio.html
+<https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/guia-landing-negocio.html>
 
 ### Dia 10
 
@@ -66,7 +126,7 @@ llevar a casos o proyectos.
 Post: como elegir hosting y stack sin pagar de mas
 
 CTA:
-https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/elegir-hosting-stack.html
+<https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/elegir-hosting-stack.html>
 
 ### Dia 17
 
@@ -89,14 +149,14 @@ llevar a recursos, afiliados o media kit cuando aplique.
 Post: monetizacion transparente en sitios tecnicos
 
 CTA:
-https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/programas-afiliados.html
+<https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/programas-afiliados.html>
 
 ### Dia 24
 
 Post: como plantear colaboraciones sin dañar la confianza de una pagina
 
 CTA:
-https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/media-kit.html
+<https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/media-kit.html>
 
 ### Dia 26
 
@@ -132,6 +192,17 @@ Resumen del mes: que aprendiste, que publicaste y que sigue para Dofepro-Tech.
 - Si tu negocio necesita algo parecido, escribeme.
 - Si quieres revisar la guia completa, te la dejo aqui.
 - Si tu herramienta encaja con esta audiencia, revisa mi Media Kit.
+
+## Primeros 3 posts recomendados
+
+1. Lanzamiento del sitio.
+Objetivo: presentar marca y llevar trafico a la home.
+
+2. Por que una landing no debe ser solo bonita.
+Objetivo: posicionarte con criterio comercial.
+
+3. Checklist antes de publicar una web.
+Objetivo: mostrar utilidad real y atraer visitas a una pagina interna.
 
 ## Enfoque recomendado
 
