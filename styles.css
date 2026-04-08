@@ -23,7 +23,7 @@
   --radius-lg: 28px;
   --radius-md: 20px;
   --radius-sm: 14px;
-  --max-width: 1160px;
+  --max-width: 1328px;
 }
 
 body[data-theme="dark"] {
@@ -92,6 +92,12 @@ textarea {
 .container {
   width: min(calc(100% - 2rem), var(--max-width));
   margin: 0 auto;
+}
+
+@media (min-width: 1180px) {
+  .container {
+    width: min(calc(100% - 1.25rem), var(--max-width));
+  }
 }
 
 .skip-link {
@@ -440,9 +446,16 @@ body[data-theme="dark"] .theme-icon-moon {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
+  gap: 0.7rem;
   padding: 0.85rem 1rem;
   border-radius: 16px;
   transition: background 180ms ease, color 180ms ease;
+}
+
+.nav-menu-home .nav-link-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: 0 0 auto;
 }
 
 .nav-list a:hover,
