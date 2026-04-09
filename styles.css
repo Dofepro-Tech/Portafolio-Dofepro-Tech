@@ -207,23 +207,69 @@ body.is-scrolled .site-header {
 }
 
 .brand {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.68rem;
   min-width: 0;
   flex: 0 1 auto;
+  isolation: isolate;
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   text-decoration: none;
 }
 
+.brand::before {
+  content: "";
+  position: absolute;
+  left: -0.24rem;
+  top: 50%;
+  width: 3.22rem;
+  height: 3.22rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(92, 255, 151, 0.56) 0%, rgba(36, 214, 109, 0.3) 36%, rgba(36, 214, 109, 0.14) 56%, rgba(36, 214, 109, 0) 78%);
+  transform: translateY(-50%);
+  filter: blur(10px);
+  opacity: 0.98;
+  pointer-events: none;
+  z-index: 0;
+  animation: brandLogoGlow 3.8s ease-in-out infinite;
+}
+
+.brand::after {
+  content: "";
+  position: absolute;
+  left: -0.12rem;
+  top: 50%;
+  width: 2.98rem;
+  height: 2.98rem;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg 286deg, rgba(255, 255, 255, 0.2) 302deg, rgba(209, 255, 225, 0.96) 324deg, rgba(97, 255, 174, 0.95) 340deg, rgba(255, 255, 255, 0.9) 350deg, transparent 360deg);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.4px), #000 calc(100% - 1.2px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2.4px), #000 calc(100% - 1.2px));
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 6px rgba(106, 255, 177, 0.55));
+  animation: brandLogoOrbit 5.2s linear infinite;
+}
+
+.brand > span {
+  position: relative;
+  z-index: 1;
+}
+
 .brand-logo {
+  position: relative;
+  z-index: 1;
   width: 2.6rem;
   height: 2.6rem;
   object-fit: contain;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.16), transparent 55%), var(--surface-strong);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(128, 255, 188, 0.38);
+  background: radial-gradient(circle at 30% 30%, rgba(122, 255, 180, 0.34), transparent 52%), radial-gradient(circle at 70% 72%, rgba(36, 214, 109, 0.18), transparent 34%), var(--surface-strong);
+  box-shadow: 0 0 0 1px rgba(91, 240, 156, 0.14), 0 0 18px rgba(59, 234, 134, 0.34), 0 0 34px rgba(36, 214, 109, 0.22), var(--shadow-soft);
   padding: 0.15rem;
 }
 
@@ -2618,6 +2664,29 @@ body[data-theme="dark"] .floating-button-whatsapp:focus-visible {
   29%,
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes brandLogoGlow {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: translateY(-50%) scale(0.97);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.06);
+  }
+}
+
+@keyframes brandLogoOrbit {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(-50%) rotate(360deg);
   }
 }
 
