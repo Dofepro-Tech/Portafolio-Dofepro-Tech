@@ -1,0 +1,28 @@
+{
+  "defaultProjectKey": "portfolio",
+  "projects": [
+    {
+      "key": "portfolio",
+      "name": "Dofepro Portfolio",
+      "root": "..",
+      "type": "web-static",
+      "entryFile": "index.html",
+      "tags": ["landing", "seo", "backend", "portfolio"],
+      "metadata": {
+        "backendPath": "backend",
+        "notes": "Proyecto web principal con frontend estatico y backend Express para contacto y asistente."
+      }
+    },
+    {
+      "key": "scraper-demo",
+      "name": "Scraper Catalogo Demo",
+      "root": "P:/Proyectos 2026/Proyectos terminados/Scraper",
+      "type": "web-static",
+      "entryFile": "index.html",
+      "tags": ["python", "scraping", "catalogo", "demo-web"],
+      "metadata": {
+        "notes": "Demo web del scraper y catalogo automatico publicado como salida visible para usuarios finales."
+      }
+    }
+  ]
+}

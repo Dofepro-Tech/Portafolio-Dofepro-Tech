@@ -21,9 +21,12 @@
       property="og:description"
       content="Landing pages, sitios web y automatizacion para negocios que quieren comunicar mejor, verse mas serios y recibir mas consultas reales."
     />
-    <meta property="og:image" content="assets/og-cover.svg" />
+    <meta property="og:image" content="https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/assets/og-cover.svg" />
+    <meta property="og:image:secure_url" content="https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/assets/og-cover.svg" />
     <meta property="og:image:alt" content="Portada de Dofepro-Tech sobre servicios de landing pages, sitios web y automatizacion para negocios." />
     <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dofepro-Tech" />
     <meta property="og:url" content="https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/" />
@@ -32,8 +35,9 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Dofepro-Tech | Landing pages, sitios web y automatizacion para captar clientes" />
     <meta name="twitter:description" content="Servicios web de Dofepro-Tech para captar consultas, mejorar presencia digital y publicar con una base tecnica seria." />
-    <meta name="twitter:image" content="assets/og-cover.svg" />
+    <meta name="twitter:image" content="https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/assets/og-cover.svg" />
     <meta name="twitter:image:alt" content="Portada de Dofepro-Tech para compartir servicios web, SEO y automatizacion." />
+    <meta name="twitter:url" content="https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/" />
     <link rel="apple-touch-icon" href="assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,6 +48,9 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="manifest" href="site.webmanifest" />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+    </script>
     <script defer src="site-data.js"></script>
     <script defer src="script.js"></script>
     <script type="application/ld+json">
@@ -156,9 +163,10 @@
             </p>
 
             <div class="hero-actions">
-              <a class="button button-primary" href="#contacto" data-contact-service="asesoria" data-contact-message="Hola, quiero conversar sobre una solucion web para mi negocio y me gustaria una orientacion inicial para captar mas consultas con una presencia digital mas clara.">Quiero captar mas clientes</a>
+              <a class="button button-primary hero-primary-cta" id="heroPrimaryCta" href="#contactForm" data-hero-primary-cta="true" data-contact-service="asesoria" data-contact-message="Hola, quiero conversar sobre una solucion web para mi negocio y me gustaria una orientacion inicial para captar mas consultas con una presencia digital mas clara.">Quiero abrir el formulario y revisar mi caso</a>
               <a class="button button-secondary" href="#paquetes">Ver soluciones y paquetes</a>
             </div>
+            <p class="hero-cta-note" id="heroCtaNote">Te lleva directo al formulario con una ruta sugerida para que avances sin rodeos.</p>
 
             <div class="hero-mini-note">
               <span class="hero-mini-dot" aria-hidden="true"></span>
@@ -978,11 +986,11 @@
                 rows="6"
                 required
                 minlength="10"
-                maxlength="500"
+                maxlength="1000"
                 aria-describedby="mensaje-help"
                 placeholder="Describe tu objetivo, lo que quieres mejorar y el tipo de resultado que esperas"
               ></textarea>
-              <small class="field-help" id="mensaje-help"><span id="charCount">0</span>/500 caracteres.</small>
+              <small class="field-help" id="mensaje-help"><span id="charCount">0</span>/1000 caracteres.</small>
             </div>
 
             <div class="field-group checkbox-row">
@@ -994,6 +1002,10 @@
               <span data-submit-label>Enviar mi consulta</span>
             </button>
             <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            <div class="form-fallback-actions" id="formFallbackActions" hidden>
+              <a class="button button-secondary" id="formFallbackEmailLink" href="mailto:domingofelizpro@gmail.com">Escribir por correo</a>
+              <p class="form-fallback-note" id="formFallbackNote">Si el envio en linea falla, puedes continuar por correo sin perder el contexto.</p>
+            </div>
           </form>
         </div>
       </section>

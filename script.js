@@ -85,14 +85,20 @@ const pageSearchInput = document.querySelector('#pageSearchInput');
 const pageSearchResults = document.querySelector('#pageSearchResults');
 const pageSearchStatus = document.querySelector('#pageSearchStatus');
 const contactShortcutLinks = Array.from(document.querySelectorAll('[data-contact-service]'));
+const heroPrimaryCta = document.querySelector('#heroPrimaryCta');
+const casesSection = document.querySelector('#casos');
 const brandLogo = document.querySelector('[data-brand-logo]');
 const brandMark = document.querySelector('.brand-mark');
 const brandTagline = document.querySelector('[data-brand-tagline]');
 const revealElements = Array.from(document.querySelectorAll('[data-reveal]'));
+const formFallbackActions = document.querySelector('#formFallbackActions');
+const formFallbackEmailLink = document.querySelector('#formFallbackEmailLink');
+const formFallbackNote = document.querySelector('#formFallbackNote');
 const fields = form ? Array.from(form.querySelectorAll('input, select, textarea')) : [];
 const draftStorageKey = 'portfolio-contact-draft';
 const submissionStorageKey = 'portfolio-contact-last-submission';
 const themeStorageKey = 'portfolio-theme';
+const allowedServices = new Set(['landing', 'sitio-web', 'auditoria', 'automatizacion', 'asesoria', 'redisenio', 'mantenimiento']);
 const assistantConversation = [];
 const contactPrefillQueryKeys = {
   service: 'contactService',
@@ -105,6 +111,7 @@ let lastContactShortcutPrefill = '';
 let assistantNudgeTimer = null;
 let assistantNudgeShown = false;
 let assistantInteracted = false;
+const firedAnalyticsEvents = new Set();
 
 const setTextContent = (selector, value) => {
   document.querySelectorAll(selector).forEach((element) => {
@@ -207,7 +214,53 @@ const createPageSearchIndex = () => pageSearchSectionIds
   })
   .filter(Boolean);
 
-const pageSearchIndex = createPageSearchIndex();
+let pageSearchIndex = [];
+let pageSearchIndexReady = false;
+
+const ensurePageSearchIndex = () => {
+  if (!pageSearchIndexReady) {
+    pageSearchIndex = createPageSearchIndex();
+    pageSearchIndexReady = true;
+  }
+
+  return pageSearchIndex;
+};
+
+const schedulePageSearchIndexBuild = () => {
+  const warmup = () => ensurePageSearchIndex();
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(warmup, { timeout: 1800 });
+    return;
+  }
+
+  window.setTimeout(warmup, 900);
+};
+
+const ensureDataLayer = () => {
+  window.dataLayer = window.dataLayer || [];
+  return window.dataLayer;
+};
+
+const pushAnalyticsEvent = (eventName, payload = {}, options = {}) => {
+  const onceKey = options.onceKey || null;
+
+  if (onceKey && firedAnalyticsEvents.has(onceKey)) {
+    return;
+  }
+
+  if (onceKey) {
+    firedAnalyticsEvents.add(onceKey);
+  }
+
+  ensureDataLayer().push({
+    event: eventName,
+    page_path: window.location.pathname,
+    page_title: document.title,
+    timestamp: new Date().toISOString(),
+    ...payload
+  });
+};
 
 const searchPageSections = (query) => {
   const normalizedQuery = normalizeSearchValue(query);
@@ -217,7 +270,7 @@ const searchPageSections = (query) => {
 
   const terms = normalizedQuery.split(/\s+/).filter(Boolean);
 
-  return pageSearchIndex
+  return ensurePageSearchIndex()
     .map((item) => {
       const titleValue = normalizeSearchValue(item.title);
       const labelValue = normalizeSearchValue(item.label);
@@ -261,14 +314,17 @@ const scrollToSearchTarget = (href) => {
 
 const scrollToContactForm = () => {
   const contactSection = document.querySelector('#contacto');
-  if (!contactSection) {
+  const contactFormTarget = form || document.querySelector('#contactForm');
+
+  if (!contactSection && !contactFormTarget) {
     return;
   }
 
-  const highlightTarget = contactSection.querySelector(':scope > .container') || contactSection;
+  const scrollTarget = contactFormTarget || contactSection;
+  const highlightTarget = contactFormTarget || contactSection.querySelector(':scope > .container') || contactSection;
   closeAssistant();
   closeNav();
-  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
   highlightTarget.classList.remove('search-target-flash');
   window.requestAnimationFrame(() => {
     highlightTarget.classList.add('search-target-flash');
@@ -875,6 +931,57 @@ const setStatus = (message, type) => {
   }
 };
 
+const hideFallbackActions = () => {
+  if (formFallbackActions) {
+    formFallbackActions.hidden = true;
+  }
+};
+
+const buildMailtoFallbackUrl = (payload = {}, reason = 'manual') => {
+  const subject = `Consulta web Dofepro-Tech | ${payload.name || 'Nuevo contacto'}`;
+  const bodyLines = [
+    `Nombre: ${payload.name || ''}`,
+    `Correo: ${payload.email || ''}`,
+    `Negocio: ${payload.company || 'No indicado'}`,
+    `Servicio: ${serviceLabels[payload.service] || payload.service || 'No indicado'}`,
+    `Motivo del fallback: ${reason}`,
+    '',
+    'Mensaje:',
+    payload.message || ''
+  ];
+
+  return `mailto:${appConfig.social.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+};
+
+const showFallbackActions = (payload, reason) => {
+  if (!formFallbackActions || !formFallbackEmailLink || !formFallbackNote) {
+    return;
+  }
+
+  formFallbackEmailLink.href = buildMailtoFallbackUrl(payload, reason);
+  formFallbackNote.textContent = reason === 'api-failure'
+    ? 'El formulario no pudo completar el envio en linea. Usa este correo y se conserva el contexto del mensaje.'
+    : 'Puedes continuar por correo sin reescribir todo el mensaje.';
+  formFallbackActions.hidden = false;
+};
+
+const getReadableFormError = (error) => {
+  if (error?.name === 'AbortError') {
+    return 'El envio tardo demasiado. Puedes intentar otra vez o continuar por correo.';
+  }
+
+  if (Array.isArray(error?.details) && error.details.length) {
+    return error.details.join(' ');
+  }
+
+  const message = String(error?.message || '').trim();
+  if (/failed to fetch/i.test(message) || /networkerror/i.test(message) || /load failed/i.test(message)) {
+    return 'No pude conectar con el backend en este momento. Puedes intentar otra vez o seguir por correo.';
+  }
+
+  return message || 'No fue posible procesar el formulario en este momento.';
+};
+
 const normalizePayload = (formData) => ({
   name: String(formData.get('nombre') || '').trim(),
   email: String(formData.get('correo') || '').trim(),
@@ -885,6 +992,35 @@ const normalizePayload = (formData) => ({
   website: String(formData.get('website') || '').trim(),
   source: 'portfolio-landing'
 });
+
+const validatePayloadOnClient = (payload) => {
+  const errors = [];
+
+  if (payload.name.length < 3 || payload.name.length > 80) {
+    errors.push('El nombre debe tener entre 3 y 80 caracteres.');
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+    errors.push('Debes ingresar un correo electronico valido.');
+  }
+
+  if (!allowedServices.has(payload.service)) {
+    errors.push('Debes seleccionar un servicio valido.');
+  }
+
+  if (payload.message.length < 10 || payload.message.length > 1000) {
+    errors.push('El mensaje debe tener entre 10 y 1000 caracteres.');
+  }
+
+  if (!payload.privacyAccepted) {
+    errors.push('Debes aceptar la politica de privacidad y los terminos.');
+  }
+
+  return {
+    ok: errors.length === 0,
+    errors
+  };
+};
 
 const saveDraft = () => {
   if (!form) {
@@ -947,20 +1083,31 @@ const buildApiUrl = () => {
 };
 
 const submitToApi = async (payload) => {
-  const response = await fetch(buildApiUrl(), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload)
-  });
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), 15000);
 
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(data.message || 'No fue posible procesar el formulario.');
+  try {
+    const response = await fetch(buildApiUrl(), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      signal: controller.signal,
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const error = new Error(data.message || 'No fue posible procesar el formulario.');
+      error.details = Array.isArray(data.errors) ? data.errors : [];
+      error.statusCode = response.status;
+      throw error;
+    }
+
+    return data;
+  } finally {
+    window.clearTimeout(timeoutId);
   }
-
-  return data;
 };
 
 const handleSuccessfulSubmission = (payload, message) => {
@@ -969,11 +1116,13 @@ const handleSuccessfulSubmission = (payload, message) => {
   form.reset();
   updateCharacterCount();
   fields.forEach((field) => field.removeAttribute('aria-invalid'));
+  hideFallbackActions();
   setStatus(message, 'is-success');
 };
 
 hydrateSiteConfig();
 applyTheme(getPreferredTheme());
+schedulePageSearchIndexBuild();
 
 if (navToggle && siteNav) {
   navToggle.addEventListener('click', toggleNav);
@@ -1015,6 +1164,38 @@ if (pageSearchForm && pageSearchInput) {
   });
 }
 
+if (heroPrimaryCta) {
+  heroPrimaryCta.addEventListener('click', () => {
+    pushAnalyticsEvent('hero_cta_click', {
+      placement: 'hero',
+      target: '#contactForm',
+      service: heroPrimaryCta.getAttribute('data-contact-service') || ''
+    });
+  });
+}
+
+if (casesSection && 'IntersectionObserver' in window) {
+  const casesObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        return;
+      }
+
+      pushAnalyticsEvent('cases_section_view', {
+        section: 'casos'
+      }, {
+        onceKey: 'cases_section_view'
+      });
+
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.45
+  });
+
+  casesObserver.observe(casesSection);
+}
+
 if (contactShortcutLinks.length) {
   contactShortcutLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
@@ -1024,7 +1205,14 @@ if (contactShortcutLinks.length) {
       }
 
       const targetUrl = buildContactNavigationUrl(link, payload);
-      const isSameDocument = targetUrl.pathname === window.location.pathname && targetUrl.hash === '#contacto' && Boolean(form);
+      const isDirectContactTarget = targetUrl.hash === '#contacto' || targetUrl.hash === '#contactForm';
+      const isSameDocument = targetUrl.pathname === window.location.pathname && isDirectContactTarget && Boolean(form);
+
+      pushAnalyticsEvent('contact_shortcut_click', {
+        placement: link.closest('section')?.id || 'unknown',
+        target: targetUrl.hash || '#contacto',
+        service: payload.service
+      });
 
       if (isSameDocument) {
         event.preventDefault();
@@ -1132,6 +1320,7 @@ if (form) {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     setStatus('', '');
+    hideFallbackActions();
 
     let firstInvalidField = null;
     fields.forEach((field) => {
@@ -1149,30 +1338,53 @@ if (form) {
     }
 
     const payload = normalizePayload(new FormData(form));
+    const clientValidation = validatePayloadOnClient(payload);
+
+    if (!clientValidation.ok) {
+      setStatus(clientValidation.errors.join(' '), 'is-error');
+      return;
+    }
+
+    pushAnalyticsEvent('contact_form_submit_attempt', {
+      service: payload.service,
+      source: payload.source
+    });
+
     setSubmittingState(true);
 
     try {
       if (canUseApi()) {
         const result = await submitToApi(payload);
         handleSuccessfulSubmission(payload, result.message || 'Mensaje enviado correctamente. Recibiras respuesta pronto.');
+        pushAnalyticsEvent('contact_form_submit_success', {
+          service: payload.service,
+          delivery_mode: result.deliveryMode || 'unknown'
+        });
       } else {
         handleSuccessfulSubmission(
           payload,
           `El formulario en linea se activara en una proxima actualizacion. Mientras tanto, escribeme directamente a ${appConfig.social.email}.`
         );
+        showFallbackActions(payload, 'manual');
       }
     } catch (error) {
-      if (appConfig.contact.allowLocalFallback) {
-        localStorage.setItem(submissionStorageKey, JSON.stringify(payload));
-        setStatus(
-          `El envio en linea todavia no esta disponible. Usa el correo ${appConfig.social.email} para contactarme de inmediato.`,
-          'is-error'
-        );
-      } else {
-        setStatus(error.message, 'is-error');
-      }
+      localStorage.setItem(submissionStorageKey, JSON.stringify(payload));
+      setStatus(getReadableFormError(error), 'is-error');
+      showFallbackActions(payload, 'api-failure');
+      pushAnalyticsEvent('contact_form_submit_error', {
+        service: payload.service,
+        message: getReadableFormError(error)
+      });
     } finally {
       setSubmittingState(false);
     }
+  });
+}
+
+if (formFallbackEmailLink) {
+  formFallbackEmailLink.addEventListener('click', () => {
+    pushAnalyticsEvent('contact_form_fallback_email_click', {
+      channel: 'mailto'
+    });
   });
 }

@@ -1,0 +1,19 @@
+{
+  "name": "dofepro-mcp-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Servidor MCP reutilizable para auditar, inspeccionar y operar multiples proyectos de Dofepro-Tech.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "check": "node scripts/check.js && node scripts/verify.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  }
+}
