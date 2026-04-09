@@ -10,7 +10,11 @@ window.PORTFOLIO_CONFIG = {
     email: 'domingofelizpro@gmail.com',
     secondaryEmail: 'elsonidistaadnj@gmail.com',
     linkedin: 'https://www.linkedin.com/in/domingo-feliz-743b43357',
-    github: 'https://github.com/Dofepro-Tech'
+    github: 'https://github.com/Dofepro-Tech',
+    whatsapp: {
+      phone: '18492618830',
+      message: 'Hola, vi tu sitio de Dofepro-Tech y quiero conversar sobre una solucion digital para mi negocio.'
+    }
   },
   ui: {
     defaultTheme: 'light'

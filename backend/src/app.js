@@ -21,11 +21,15 @@ const corsOptions = {
     }
 
     callback(new Error('Origen no permitido por CORS.'));
-  }
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 204
 };
 
 app.use(helmet());
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json({ limit: '20kb' }));
 app.use(express.urlencoded({ extended: false }));
 
@@ -49,6 +53,14 @@ app.use((_req, res) => {
 });
 
 app.use((error, _req, res, _next) => {
+  if (error?.message === 'Origen no permitido por CORS.') {
+    res.status(403).json({
+      ok: false,
+      message: 'Origen no permitido por CORS.'
+    });
+    return;
+  }
+
   console.error('Unhandled backend error:', error);
   res.status(500).json({
     ok: false,

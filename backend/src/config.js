@@ -2,15 +2,36 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+const defaultAllowedOrigins = [
+  'http://127.0.0.1:5500',
+  'http://localhost:5500',
+  'http://127.0.0.1:3000',
+  'http://localhost:3000',
+  'http://127.0.0.1:4173',
+  'http://localhost:4173',
+  'http://127.0.0.1:5173',
+  'http://localhost:5173',
+  'https://dofepro-tech.github.io'
+];
+
 const parseOrigins = (value) => {
-  if (!value || value === '*') {
+  if (!value) {
     return '*';
   }
 
-  return value
-    .split(',')
-    .map((origin) => origin.trim())
-    .filter(Boolean);
+  if (value === '*') {
+    return '*';
+  }
+
+  return Array.from(
+    new Set(
+      value
+        .split(',')
+        .map((origin) => origin.trim())
+        .filter(Boolean)
+        .concat(defaultAllowedOrigins)
+    )
+  );
 };
 
 const toNumber = (value, fallback) => {

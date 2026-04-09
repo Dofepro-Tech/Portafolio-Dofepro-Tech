@@ -105,6 +105,34 @@ Post: como saber si un negocio necesita una landing page
 CTA:
 <https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/guia-landing-negocio.html>
 
+Texto listo para publicar:
+
+No todos los negocios necesitan una web grande.
+Pero muchos si necesitan una landing clara.
+
+Cuando un negocio ya tiene algo que vender, explicar o validar, una landing bien pensada suele ser mas util que una web llena de secciones que nadie recorre.
+
+Una landing tiene sentido cuando necesitas:
+
+- presentar una oferta concreta,
+- captar mensajes o cotizaciones,
+- probar si una idea genera interes,
+- o explicar mejor un servicio sin distraer al visitante.
+
+El problema es que muchas veces se construye al reves:
+primero se piensa en el diseño y despues en el mensaje.
+
+Para mi, una landing funciona mejor cuando combina 3 cosas:
+
+- claridad,
+- confianza,
+- y una accion facil de tomar.
+
+Deje una guia simple sobre cuando si vale la pena crear una landing para un negocio:
+<https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/guia-landing-negocio.html>
+
+Si estas evaluando crear una, puede servirte como punto de partida.
+
 ### Dia 10
 
 Post: errores comunes al publicar un sitio con formulario real

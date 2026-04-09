@@ -10,7 +10,11 @@ const defaultConfig = {
     email: 'domingofelizpro@gmail.com',
     secondaryEmail: 'elsonidistaadnj@gmail.com',
     linkedin: 'https://www.linkedin.com/in/domingo-feliz-743b43357',
-    github: 'https://github.com/Dofepro-Tech'
+    github: 'https://github.com/Dofepro-Tech',
+    whatsapp: {
+      phone: '',
+      message: 'Hola, vi tu sitio de Dofepro-Tech y quiero conversar sobre una solucion digital para mi negocio.'
+    }
   },
   ui: {
     defaultTheme: 'light'
@@ -85,6 +89,8 @@ const pageSearchInput = document.querySelector('#pageSearchInput');
 const pageSearchResults = document.querySelector('#pageSearchResults');
 const pageSearchStatus = document.querySelector('#pageSearchStatus');
 const contactShortcutLinks = Array.from(document.querySelectorAll('[data-contact-service]'));
+const whatsappLinks = Array.from(document.querySelectorAll('[data-whatsapp-link]'));
+const whatsappItems = Array.from(document.querySelectorAll('[data-whatsapp-item]'));
 const heroPrimaryCta = document.querySelector('#heroPrimaryCta');
 const casesSection = document.querySelector('#casos');
 const brandLogo = document.querySelector('[data-brand-logo]');
@@ -94,6 +100,7 @@ const revealElements = Array.from(document.querySelectorAll('[data-reveal]'));
 const formFallbackActions = document.querySelector('#formFallbackActions');
 const formFallbackEmailLink = document.querySelector('#formFallbackEmailLink');
 const formFallbackNote = document.querySelector('#formFallbackNote');
+const whatsappButton = document.querySelector('#whatsappButton');
 const fields = form ? Array.from(form.querySelectorAll('input, select, textarea')) : [];
 const draftStorageKey = 'portfolio-contact-draft';
 const submissionStorageKey = 'portfolio-contact-last-submission';
@@ -128,6 +135,41 @@ const setLinkValue = (selector, value, prefix = '') => {
   });
 };
 
+const sanitizeWhatsappPhone = (value) => String(value || '').replace(/[^\d]/g, '').trim();
+
+const buildWhatsAppUrl = () => {
+  const whatsappConfig = appConfig.social?.whatsapp || {};
+  const phone = sanitizeWhatsappPhone(whatsappConfig.phone);
+  if (!phone) {
+    return '';
+  }
+
+  const message = String(whatsappConfig.message || 'Hola, vi tu sitio y quiero conversar sobre una solucion digital.').trim();
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+};
+
+const updateWhatsAppLinks = () => {
+  const whatsappUrl = buildWhatsAppUrl();
+  const isAvailable = Boolean(whatsappUrl);
+
+  whatsappItems.forEach((element) => {
+    element.hidden = !isAvailable;
+  });
+
+  whatsappLinks.forEach((link) => {
+    if (!isAvailable) {
+      link.removeAttribute('href');
+      return;
+    }
+
+    link.setAttribute('href', whatsappUrl);
+  });
+
+  if (whatsappButton) {
+    whatsappButton.classList.toggle('is-visible', isAvailable);
+  }
+};
+
 const isAbsoluteUrl = (value) => /^https?:\/\//i.test(value);
 
 const getApiBaseUrl = () => String(appConfig.contact.apiBaseUrl || '').trim();
@@ -157,6 +199,8 @@ const updateApiStatus = () => {
 
   status.textContent = 'Formulario y correo activos';
 };
+
+const getWhatsAppPlacement = (link) => link.getAttribute('data-whatsapp-placement') || link.closest('section')?.id || (link.closest('footer') ? 'footer' : 'global');
 
 const focusSectionLinks = {
   servicios: { label: 'Ver servicios', href: '#servicios' },
@@ -484,6 +528,14 @@ const renderPageSearchResults = (results, query) => {
   pageSearchStatus.textContent = `${results.length} resultado${results.length === 1 ? '' : 's'} para "${query}".`;
 };
 
+const clearPageSearchUi = () => {
+  if (!pageSearchInput) {
+    return;
+  }
+
+  renderPageSearchResults([], '');
+};
+
 const appendAssistantMessage = (role, text, links = []) => {
   if (!assistantMessages) {
     return;
@@ -760,6 +812,7 @@ const hydrateSiteConfig = () => {
   setLinkValue('[data-secondary-email-link]', appConfig.social.secondaryEmail, 'mailto:');
   setLinkValue('[data-linkedin-link]', appConfig.social.linkedin);
   setLinkValue('[data-github-link]', appConfig.social.github);
+  updateWhatsAppLinks();
   updateApiStatus();
 
   if (brandLogo && appConfig.brand?.logoSrc) {
@@ -860,15 +913,17 @@ const updateScrollUi = () => {
   const scrollTop = window.scrollY;
   const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
   const progress = scrollableHeight > 0 ? Math.min((scrollTop / scrollableHeight) * 100, 100) : 0;
+  const hasScrollTopButton = scrollTop > 420;
 
   if (scrollProgressBar) {
     scrollProgressBar.style.transform = `scaleX(${progress / 100})`;
   }
 
   if (scrollTopButton) {
-    scrollTopButton.classList.toggle('is-visible', scrollTop > 420);
+    scrollTopButton.classList.toggle('is-visible', hasScrollTopButton);
   }
 
+  document.body.classList.toggle('has-scroll-top', hasScrollTopButton);
   document.body.classList.toggle('is-scrolled', scrollTop > 24);
 };
 
@@ -900,7 +955,14 @@ const setupRevealAnimations = () => {
     return;
   }
 
-  revealElements.forEach((element) => revealObserver.observe(element));
+  revealElements.forEach((element) => {
+    const siblings = element.parentElement
+      ? Array.from(element.parentElement.children).filter((child) => child.hasAttribute('data-reveal'))
+      : [];
+    const siblingIndex = Math.max(0, siblings.indexOf(element));
+    element.style.setProperty('--reveal-delay', `${Math.min(siblingIndex, 5) * 70}ms`);
+    revealObserver.observe(element);
+  });
 };
 
 const updateCharacterCount = () => {
@@ -1162,6 +1224,27 @@ if (pageSearchForm && pageSearchInput) {
       scrollToSearchTarget(results[0].href);
     }
   });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) {
+      return;
+    }
+
+    if (pageSearchForm.contains(target) || pageSearchResults?.contains(target)) {
+      return;
+    }
+
+    clearPageSearchUi();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') {
+      return;
+    }
+
+    clearPageSearchUi();
+  });
 }
 
 if (heroPrimaryCta) {
@@ -1223,6 +1306,17 @@ if (contactShortcutLinks.length) {
       }
 
       link.setAttribute('href', `${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`);
+    });
+  });
+}
+
+if (whatsappLinks.length) {
+  whatsappLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      pushAnalyticsEvent('whatsapp_click', {
+        placement: getWhatsAppPlacement(link),
+        channel: 'whatsapp'
+      });
     });
   });
 }

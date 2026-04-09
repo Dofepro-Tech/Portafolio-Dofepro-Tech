@@ -103,6 +103,46 @@ Motivo: presencia web moderna, landing pages y comparativas de herramientas.
 - Formularios de prensa, media o business development
 - Herramientas como Hunter o Apollo solo si luego verificas el contexto real
 
+## 3.3 Enlaces directos de marcas para escribirles primero
+
+1. Hostinger
+Programa: <https://www.hostinger.com/affiliates>
+Registro: <https://affiliates.hostinger.com/>
+
+2. Namecheap
+Programa: <https://www.namecheap.com/affiliates/>
+Impact: <https://app.impact.com/campaign-promo-signup/Namecheap.brand>
+Correo del programa: <mailto:affiliates@namecheap.com>
+
+3. SE Ranking
+Programa: <https://seranking.com/affiliate-program.html>
+Contacto general: <https://seranking.com/contact.html>
+
+4. Cloudways
+Programa: <https://www.cloudways.com/en/affiliate-program.php>
+Contacto directo: <mailto:affiliates@cloudways.com>
+
+5. Kinsta
+Programa: <https://kinsta.com/affiliates/>
+Registro: <https://affiliate.kinsta.com/register>
+Contacto: <mailto:affiliates@kinsta.com>
+
+6. Canva
+Programa actual: <https://www.canva.com/help/canva-affiliate-marketing-program/?query=affiliates>
+Aplicacion Canvassador: <https://public.canva.site/canvassadors>
+Correo afiliados: <mailto:affiliate@canva.com>
+Correo partnerships: <mailto:strategic-partnerships@canva.com>
+
+7. Semrush
+Programa: <https://www.semrush.com/partner-program/>
+Sitio principal: <https://www.semrush.com/>
+
+8. Elementor
+Programa: <https://elementor.com/affiliate-program/>
+Contacto: <https://elementor.com/contact/>
+
+Empieza por Hostinger, Namecheap, SE Ranking, Cloudways y Kinsta. Son los que ahora mismo encajan mejor con tu sitio y con el tipo de contenido que ya estas publicando.
+
 ## 4. Correo para programa de afiliados
 
 Asunto: Interes en programa de afiliados de [Marca]
