@@ -1,0 +1,68 @@
+name: Lanzar nueva versión
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Crear GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generar notas y crear release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = context.ref.replace('refs/tags/', '');
+
+            const { data: releases } = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 10
+            });
+            const sorted = releases
+              .filter(r => !r.draft)
+              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const previousTag = sorted.length > 0 ? sorted[0].tag_name : null;
+
+            let body = `## Versión ${tag}\n\n`;
+
+            if (previousTag) {
+              const { data: comparison } = await github.rest.repos.compareCommitsWithBasehead({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                basehead: `${previousTag}...${tag}`
+              });
+
+              const commits = comparison.commits
+                .map(c => `- ${c.commit.message.split('\n')[0]} ([\`${c.sha.slice(0, 7)}\`](${c.html_url}))`)
+                .join('\n');
+
+              body += `### Cambios desde ${previousTag}\n\n${commits || 'Sin cambios registrados.'}\n`;
+            } else {
+              body += `Primera versión publicada del proyecto.\n`;
+            }
+
+            body += `\n### Despliegues\n`;
+            body += `- 🌐 **Frontend:** https://dofepro-tech.github.io/Portafolio-Dofepro-Tech/\n`;
+            body += `- ⚙️ **Backend API:** https://portafolio-dofepro-tech-api.onrender.com\n`;
+
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tag,
+              name: `🚀 ${tag} — Portafolio Dofepro-Tech`,
+              body: body,
+              draft: false,
+              prerelease: /-(alpha|beta|rc)\./i.test(tag)
+            });
